@@ -9,3 +9,9 @@
 #define _33PC 0x0155
 #define _25PC 0x00ff
 #define _20PC 0x00cb
+
+void scan(char *values)
+{
+  unsigned char value, board, channel;
+  
+}
