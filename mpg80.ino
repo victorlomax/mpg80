@@ -1,70 +1,63 @@
 // ATMega328
 
-// Pin 28 (PC5) will be use for analog read
-// Pin 23-26 (PC0-PC4) : select the 4067 channel
-// Pin 14-16 (PB0-PB2) : select the board
-
-
-// MASK: expected value
-//      bits  
-//   0:  -   no value (void)
-//   1:  1   one value (touch switch with latch; +5V or 0V)
-//   2:  1   two values (+5V or 0V)
-//   3:  2   three values (+5V, 2.5V or 0V)
-//   4:  2   four values (+5V, 3.3V, 1.7V, or 0V)
-//   5:  3   five values (+5V, 3.7V, 2.5V, 1.3V or 0V)
-//  16:  4   16 values
-// 127:  7   continuous values
+#include <SPI.h>
 
 #define	MODIFIED	0x80
 
-#define	_80PC	0x0332
-#define	_75PC	0x02ff
-#define	_66PC	0x02aa
-#define	_60PC	0x0265
-#define	_50PC	0x01ff
-#define	_40PC	0x0198
-#define	_33PC	0x0155
-#define	_25PC	0x00ff
-#define	_20PC	0x00cb
+// ***** Potentiometer boards *****
+// Pin 23-24 (PC0-PC1) : select the 4051 channel, hence the board
+#define POT_BOARD	PORTC
+// Highest board number
+#define MAX_POT_BOARD	0x05
+// Highest channel number on the highest board
+#define MAX_POT_CHANNEL	0x07
 
-int	analogPin = 5;
+// ***** SPI control *****
+// Pin 16 is used to set /CE on 74LS139-A
+#define SPI_SELECT	16
+// Port B (Pin 14-15) is used to select the channel (ie SPI device) on 74LS139-A
+#define SPI_DEVICE	PORTB
 
-void scan(char *mask, char *values)
+#define SPI_ADC	1
+#define SPI_BUTTON	2
+#define SPI_LED	3
+#define SPI_DISPLAY	4
+
+void setup()
+{
+	...
+	SPI.begin();
+
+	pinMode(SPI_SELECT, OUTPUT);
+
+	pinMode(23, OUTPUT);	// Port C.0
+	pinMode(24, OUTPUT);	// Port C.1
+
+	pinMode(14, OUTPUT);	// Port B.0
+	pinMode(15, OUTPUT);	// Port B.1
+
+	...
+}
+
+void scan(char *values)
 {
 	int board, channel, value;
 
-	pinMode(analogPin, INPUT);
-	analogReference(DEFAULT);
+	digitalwrite(SPI_DEVICE, SPI_ADC);
+	digitalwrite(SPI_SELECT, LOW);
+	SPI.beginTransaction(SPISettings(3600000, MSBFIRST, SPI_MODE0))
 
-	for (board=0; board<6; board++)
+	for (board=0; board<MAX_POT_BOARD; board++)
 	{
-		digitalwrite(PORTC, board & 0x07);
-		for (channel=0; channel<16; channel++, values++, mask++)
+		digitalwrite(POT_BOARD, SPI_ADC);
+		for (channel=0; channel<MAX_POT_CHANNEL; channel++, values++)
 		{
-			digitalwrite(PORTB, channel & 0x0f);
-			value=analogRead(analogPin);
-			switch(*mask)
-			{
-				case 0: break;
-				case 1: 
-				case 2: value=(value>_50PC)?0x0001:0x0000; break;
-				case 3: value=(value>_66PC)?0x0002:((value>_33PC)?0x0001:0x0000); break;
-				case 4: if(value<_25PC) value=0x0000;
-					if(value>_75PC) value=0x0003;
-					if(value>_50PC) value=0x0002;
-					if(value>0x0003) value=0x0001;
-					break;
-				case 5: if(value<_20PC) value=0x0000;
-					if(value>_80PC) value=0x0004;
-					if(value>_60PC) value=0x0003;
-					if(value>_40PC) value=0x0002;
-					if(value>0x0004) value=0x0001;
-					break;
-				case 16: analogprecision(PORTA, 4); break;
-				case 127: value=value>>3; break;
-			}
+			SPI.transfer(channel);
+			SPI.transfer(channel);
+			value=spi.transfer(0x00);
 			if(*values!=value) *values=value|MODIFIED;
 		}
 	}
+	SPI.endTransaction();
+	digitalwrite(SPI_SELECT, HIGH);
 }
