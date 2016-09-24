@@ -2,6 +2,8 @@
 
 #include <SPI.h>
 
+MCP button_pannel(1);
+
 #define	MODIFIED	0x80
 
 // ***** Potentiometer boards *****
@@ -23,6 +25,8 @@
 #define SPI_LED	3
 #define SPI_DISPLAY	4
 
+char values¹28
+
 void setup()
 {
 	...
@@ -38,8 +42,11 @@ void setup()
 
 	...
 }
-
-void scan(char *values)
+void loop()
+{
+	pot_scan();
+}
+void pot_scan(char *values)
 {
 	int board, channel, value;
 
