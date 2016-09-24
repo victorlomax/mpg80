@@ -7,6 +7,7 @@ Characteristics:
 - 64 LEDS
 - 32 tactile switches
 - HD44780 compatible 16x2 LCD display
+
 Chips used:
 - Atmel ATMega328P (CPU)
 - Microchip MCP (SPI compatible Dual channel UART; MIDI Interface)
