@@ -24,4 +24,4 @@ ATMega pins used:
 - PB2 (16): drives 74139 pin /E to enable/disable SPI communication
 - PB3-PB5 (17-19): SPI communication
 - PC0-PC2 (23-25): drives 4051 to power a group of potentiometers
-- PD2 (4): receives interrupt from SC16IS752 when a switch is pressed
+- PD2 (4): receives interrupt from MCP23S17 when a switch is pressed
