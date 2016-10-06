@@ -4,7 +4,7 @@ Recreation of a Roland MPG80 with an Arduino.
 Characteristics:
 - 29 linear sliders (10K)
 - 11 potentiometers (10K)
-- 55 LEDS
+- 64 white LEDS + 1 red LED (power status)
 - 39 tactile switches
 - HD44780 compatible 8x2 LCD display
   Messages:
