@@ -7,27 +7,6 @@ Characteristics:
 - 64 white LEDS + 1 red LED (power status)
 - 39 tactile switches
 - HD44780 compatible 8x2 LCD display
-  Messages:
-  MIDI CH (Midi channel)
-  L16 U16
-  
-  ARP MIDI  (Arpeggio MIDI sync)
-  CLK MTC  (CLK=Midi clock, MTC=Midi time code)
-  
-  TONE
-  999 999
-
-  PATCH
-  999
-  
-  REQUEST
-  PATCH...
-  
-  LOADING
-  PATCH...
-  
-  SENDING
-  PATCH...
 
 Chips used:
 - Atmel ATMega328P (CPU)
