@@ -6,7 +6,7 @@ Characteristics:
 - 11 potentiometers (10K)
 - 64 white LEDS + 1 red LED (power status)
   * Note 1: The max number of simulateously lit white LED is 32. 
-- 39 tactile switches
+- 39 tactile switches, replacing the original sliding selectors
 - EastRising ERM802FS-3 8x2 Black-on-White LCD display (HD44780-compatible)
 
 Chips used:
