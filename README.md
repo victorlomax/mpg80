@@ -17,7 +17,7 @@ Chips used:
   
 - Maxim Integrated MAX7221 (SPI compatible LED driver). 
   * Datasheet: https://datasheets.maximintegrated.com/en/ds/MAX7219-MAX7221.pdf
-  * Note 2: This chip is not a real SPI compatible device as DOUT is not tri-state. A NL17SZ126 (or 1/4 74HC125) is required to comply with SPI interfacing.
+  * Note 2: This chip is not a real SPI compatible device as DOUT is not tri-state; however, in our case, we don't use DOUT.
   * 24-SOIC: Digikey P/N=MAX7221CWG+, Price=13.00 CAD
   * 24-DIP: Digikey P/N=MAX7221CNG+-ND, Price=13.18 CAD
 
@@ -30,9 +30,6 @@ Chips used:
   * Datasheet: http://ww1.microchip.com/downloads/en/DeviceDoc/21295d.pdf
   * 16-SOIC: Digikey P/N=MCP3008-I/SL, Price=3.09 CAD
   * 16-DIP: Digikey P/N=	MCP3008-I/P-ND, Price=3.09 CAD
-  
-- ON Semiconductor NL17SZ126DFT2G (Buffer, Non-Inverting 1 Bit Push-pull output)
-  * SC-70: Digikey P/N=NL17SZ126DFT2GOSCT-ND, Price=0.48 CAD
   
 - ON Semiconductor 74HC4051 (8 channel analog switch; select which group of sliders/potentiometers to scan)
   * Datasheet: http://www.onsemi.com/pub_link/Collateral/MC74HC4051A-D.PDF
