@@ -4,7 +4,7 @@ Recreation of a Roland MPG80 with an Arduino.
 Characteristics:
 - 29 linear sliders (10K)
 - 11 potentiometers (10K)
-- 64 white LEDS + 1 red LED (power status)
+- 66 white LEDS + 1 red LED (power status)
   * Note 1: The max number of simulateously lit white LED is 32. 
 - 39 tactile switches, replacing the original sliding selectors
 - EastRising ERM802FS-3 8x2 Black-on-White LCD display (HD44780-compatible)
@@ -20,6 +20,8 @@ Chips used:
   * Note 2: This chip is not a real SPI compatible device as DOUT is not tri-state; however, in our case, we don't use DOUT.
   * 24-SOIC: Digikey P/N=MAX7221CWG+, Price=13.00 CAD
   * 24-DIP: Digikey P/N=MAX7221CNG+-ND, Price=13.18 CAD
+  An alternative could be AMS AS1106
+  http://ams.com/eng/Products/Power-Management/LED-Drivers/AS1106
 
 - Microchip MCP23S17 (SPI compatible dual-channel 8 bits GPIO; Switch driver)
   * Datasheet: http://ww1.microchip.com/downloads/en/DeviceDoc/20001952C.pdf
