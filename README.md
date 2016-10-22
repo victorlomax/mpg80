@@ -4,9 +4,9 @@ Recreation of a Roland MPG80 with an Arduino.
 Characteristics:
 - 29 linear sliders (10K)
 - 11 potentiometers (10K)
-- 66 white LEDS + 1 red LED (power status)
+- 60 white LEDS + 1 red LED (power status)
   * Note 1: The max number of simulateously lit white LED is 32. 
-- 39 tactile switches, replacing the original sliding selectors
+- 37 tactile switches, replacing the original sliding selectors
 - EastRising ERM802FS-3 8x2 Black-on-White LCD display (HD44780-compatible)
 
 Chips used:
