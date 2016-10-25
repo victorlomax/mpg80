@@ -32,18 +32,28 @@ Chips used:
   * Datasheet: http://ww1.microchip.com/downloads/en/DeviceDoc/21295d.pdf
   * 16-SOIC: Digikey P/N=MCP3008-I/SL, Price=3.09 CAD
   * 16-DIP: Digikey P/N=	MCP3008-I/P-ND, Price=3.09 CAD
-  
+
+- Fujitsu MB85RS64VPNF-G-JNERE1 (SPI compatible 64Kb FRAM)
+ 
 - ON Semiconductor 74HC4051 (8 channel analog switch; select which group of sliders/potentiometers to scan)
   * Datasheet: http://www.onsemi.com/pub_link/Collateral/MC74HC4051A-D.PDF
   * 16-SOIC: Digikey P/N=MC74HC4051ADWR2GOSCT-ND, Price=0.85 CAD
   
-- 74HC139 (dual 2-in-4 decoder; select SPI device)
+- 74HC138 (dual 3-in-8 decoder; select SPI device)
+  * 000: (no device selected)
+  * 001: Select ADC (MCP3008)
+  * 010: Select GPIO (MCP23S17)
+  * 011: Select UART (SC16IS752)
+  * 100: Select LED Driver (MAX7221 or AS1106)
+  * 101: Select FRAM (MB85RS64VPNF)
+  * 110: (not used)
+  * 111: (not used)
+  
 - 6N135 (optocoupler)
 
 ATMega pins used:
 - PD0-PD7 (2-6, 11-13): communication with LCD display
-- PB0, PB1 (14, 15): drives 74139 to select SPI device
-- PB2 (16): drives 74139 pin /E to enable/disable SPI communication
+- PB0, PB1 (14-16): drives 74138 to select SPI device
 - PB3-PB5 (17-19): SPI communication
 - PC0-PC2 (23-25): drives 4051 to power a group of potentiometers
 - PD2 (4): interrupt from MCP23S17 when a switch is pressed
