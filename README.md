@@ -34,6 +34,8 @@ Chips used:
   * 16-DIP: Digikey P/N=	MCP3008-I/P-ND, Price=3.09 CAD
 
 - Fujitsu MB85RS64VPNF-G-JNERE1 (SPI compatible 64Kb FRAM)
+  * Datasheet: http://www.fujitsu.com/downloads/MICRO/fsa/pdf/products/memory/fram/MB85RS64V-DS501-00015-4v0-E.pdf
+  * 8-SOIC: Digikey P/N=865-1260-1-ND, Price=2.42 CAD
  
 - ON Semiconductor 74HC4051 (8 channel analog switch; select which group of sliders/potentiometers to scan)
   * Datasheet: http://www.onsemi.com/pub_link/Collateral/MC74HC4051A-D.PDF
