@@ -1,3 +1,3 @@
 Frabas MPG-80
 
-This is the casing.
+This folder contains the casing.
