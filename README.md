@@ -8,6 +8,9 @@ Characteristics:
   * Note 1: The max number of simulateously lit white LED is 32. 
 - 35 tactile switches, replacing the original sliding selectors
 - EastRising ERM802FS-3 8x2 Black-on-White LCD display (HD44780-compatible)
+  * Datasheet (controler): http://www.buydisplay.com/download/ic/SPLC780.pdf
+  * Datasheet (display): http://www.buydisplay.com/download/manual/ERM802-3_Series_Datasheet.pdf
+  * Price: $ 2.15
 
 Chips used:
 - Atmel ATMega328P (CPU)
