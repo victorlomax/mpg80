@@ -23,6 +23,7 @@ Chips used:
   * Note 2: This chip is not a real SPI compatible device as DOUT is not tri-state; however, in our case, we don't use DOUT.
   * 24-SOIC: Digikey P/N=MAX7221CWG+, Price=13.00 CAD
   * 24-DIP: Digikey P/N=MAX7221CNG+-ND, Price=13.18 CAD
+  
   An alternative could be AMS AS1106
   http://ams.com/eng/Products/Power-Management/LED-Drivers/AS1106
 
