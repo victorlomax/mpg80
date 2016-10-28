@@ -42,7 +42,7 @@ Chips used:
   * 16-SOIC: Digikey P/N=MC74HC4051ADWR2GOSCT-ND, Price=0.85 CAD
   
 - 74HC138 (dual 3-in-8 decoder; select SPI device)
-  * 000: (no device selected)
+  * 000: Select LCD Driver (HD44780)
   * 001: Select ADC (MCP3008)
   * 010: Select GPIO (MCP23S17)
   * 011: Select UART (SC16IS752)
@@ -54,7 +54,10 @@ Chips used:
 - 6N135 (optocoupler)
 
 ATMega pins used:
-- PD0-PD7 (2-6, 11-13): communication with LCD display
+- PD0-PD7 (2-6, 11-13): DB0-DB7 on LCD display
+- PC3 (26): R/W on LCD display
+- PC4 (27): RS on LCD display
+- PC5 (28): enable/disable 74138
 - PB0, PB1 (14-16): drives 74138 to select SPI device
 - PB3-PB5 (17-19): SPI communication
 - PC0-PC2 (23-25): drives 4051 to power a group of potentiometers
