@@ -44,6 +44,9 @@ Chips used:
   * Datasheet: http://www.onsemi.com/pub_link/Collateral/MC74HC4051A-D.PDF
   * 16-SOIC: Digikey P/N=MC74HC4051ADWR2GOSCT-ND, Price=0.85 CAD
   
+- ST Microeletronics LD1117S33T (3.3V voltage regulator)
+  * Datasheet: http://datasheet.octopart.com/LD1117S33TR-STMicroelectronics-datasheet-7281477.pdf
+  
 - 74HC138 (dual 3-in-8 decoder; select SPI device)
   * 000: Select LCD Driver (HD44780)
   * 001: Select ADC (MCP3008)
