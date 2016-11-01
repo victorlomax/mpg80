@@ -15,17 +15,17 @@ MCP button_pannel(1);
 #define MAX_POT_CHANNEL	0x07
 
 // ***** SPI control *****
-// Pin 16 is used to set /CE on 74LS139-A
-#define SPI_SELECT	16
-// Port B (Pin 14-15) is used to select the channel (ie SPI device) on 74LS139-A
+// Port B (Pin 14-16) is used to select the channel (ie SPI device) on 74LS138
 #define SPI_DEVICE	PORTB
 
-#define SPI_ADC	1
+#define SPI_IDLE	0
+#define SPI_ADC		1
 #define SPI_BUTTON	2
-#define SPI_LED	3
-#define SPI_DISPLAY	4
+#define SPI_LED		3
+#define SPI_MIDI	4
+#define SPI_RAM		5
 
-char values¹28
+char values[28];
 
 void setup()
 {
