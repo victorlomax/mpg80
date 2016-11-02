@@ -1,1 +1,762 @@
+Parameter			Value range
+0x00	LFO-1 RATE		0x00 - 0x64
+0x01	LFO-1 DELAY TIME	0x00 - 0x64
+0x02	LFO-1 WAVEFORM		0x00 = Random
+				0x01 = Square Wave
+				0x02 = Sawtooth Wave
+				0x02 = Triangle Wave
+0x03	VCO MOD LFO-1 DEPTH	0x00 - 0x64
+0x04	VCO MOD ENV-1 DEPTH	0x00 - 0x64
+0x05	PW			0x00 - 0x64
+0x06	PWM			0x00 - 0x64
+0x07	PWM MODE SEL		0x00 = Keyboard	
+				0x01 = LFO-1	
+				0x02 = ENV-1	
+0x08	PWM POL			0x00 = Inverted
+				0x01 = Normal
+0x09	VCO KEY FOLLOW		0x00 - 0x64
+0x0a	VCO SEL			0x00 = VCO-2	
+				0x01 = OFF	
+				0x02 = VCO-1	
+0x0b	XMOD MANUAL DEPTH	0x00 - 0x64
+0x0c	XMOD ENV-l DEPTH	0x00 - 0x64
+0x0d	XMOD POL		0x00 = Inverted
+				0x01 = Normal
+0x0e	VCO-1 MOD		0x00 = Inverted
+				0x01 = OFF	
+				0x02 = Normal
+0x0f	VCO-1 RANGE		0x24 - 0x54 (key 36 to 84, 60 = middle C at 8')
+0x10	VCO-1 WAVEFORM		0x00 = Square Wave
+				0x01 = Pulse Wave
+				0x02 = Sawtooth Wave
+				0x03 = Triangle Wave
+0x11	VCO SYNC		0x00 = VCO-1 <- VCO-2
+				0x01 = OFF
+				0x02 = VCO-1 -> VCO-2
+0x12	VCO-2 MOD		0x00 = Inverted
+				0x01 = OFF
+				0x02 = Normal
+0x13	VCO-2 RANGE		0x00 = Low Frequency
+				0x24 - 0x54 (key 36 to 84, 60 = middle C at 8')
+				0x64 = High Frequency
+0x14	VCO-2 FINE TUNE		0x00 - 0x64
+0x15	VCO-2 WAVEFORM		0x00 = Noise
+				0x01 = Pulse Wave
+				0x02 = Sawtooth Wave
+				0x03 = Triangle Wave
+0x16	MIXER			0x00 - 0x64
+0x17	HPF CUTOFF FREQ		0x00 - 0x64
+0x18	VCF CUTOFF FREQ		0x00 - 0x64
+0x19	VCF RESONANCE		0x00 - 0x64
+0x1a	VCF ENV SEL		0x00 = ENV-2
+				0x01 = ENV-1
+0x1b	VCF ENV POL		0x00 = Inverted
+				0x01 = Normal
+0x1c	VCF MOD ENV DEPTH	0x00 - 0x64
+0x1d	VCF MOD LFO-1 DEPTH	0x00 - 0x64
+0x1e	VCF KEY FOLLOW		0x00 - 0x64
+0x1f	VCA ENV-2 LEVEL		0x00 - 0x64
+0x20	VCA MOD LFO-1 DEPTH	0x00 - 0x64
+0x21	DYNAMICS TIME		0x00 - 0x64
+0x22	DYNAMICS LEVEL		0x00 - 0x64
+0x23	ENV RESET		0x00 = OFF
+				0x01 = ON
+0x24	ENV-1 DYNAMICS		0x00 = OFF
+				0x01 = ON
+0x25	ENV-1 ATTACK TIME	0x00 - 0x64
+0x26	ENV-1 DECAY TIME	0x00 - 0x64
+0x27	ENV-1 SUSTAIN LEVEL	0x00 - 0x64
+0x28	ENV-1 RELEASE TIME	0x00 - 0x64
+0x29	ENV-1 KEY FOLLOW	0x00 - 0x64
+0x2a	ENV-2 DYNAMICS		0x00 = OFF
+				0x01 =	ON
+0x2b	ENV-2 ATTACK TIME	0x00 - 0x64
+0x2c	ENV-2 DECAY TIME	0x00 - 0x64
+0x2d	ENV-2 SUSTAIN LEVEL	0x00 - 0x64
+0x2e	ENV-2 RELEASE TIME	0x00 - 0x64
+0x2f	ENV-2 KEY FOLLOW	0x00 - 0x64
+*/
 
+/*
+0x00	KEY MODE SELECT		0x00 = Dual
+				0x0l = Split-1
+				0x02 = Split-2
+				0x03 = Whole
+0x01	SPLIT POINT		0x15 - 0x6C (Note number 21 - 108)
+0x02	BALANCE			0x00 - 0x64
+0x03	TONE NUMBER		0x00 - 0x3F
+0x04	OCT SHIFT		0x00 = 2 OCT Down
+				0x01 = 1 OCT Down
+				0x02 = Normal
+				0x03 = 1 OCT Up
+				0x04 = 2 OCT Up
+0x05	ASSIGN MODE SELECT	0x00 = Solo
+				0x01 = Unison-1
+				0x02 = Unison-2
+				0x03 = Poly-l
+				0x04 = Poly-2
+0x06	UNISON DETUNE		0x00 - 0x64
+0x07	HOLD			0x00 = OFF
+				0x01 = ON (always) (MIDI Damper messages ignored)
+				0x02 = MIDI Damper messages recognized
+0x08	GLIDE			0x00 - 0x64
+0x09	BENDER SENS		0x00 - 0x64
+0x0a	VCO-1 BEND		0x00 = OFF
+				0x01 = Normal (Slightly more than 1 octave)
+				0x02 = Wide (2.5 octaves)
+0x0b	VCO-2 BEND		0x00 = OFF
+				0x01 = Normal (Slightly more than 1 octave)
+				0x02 = Wide (2.5 octaves)
+0x0c	AFTER TOUCH SENS	0x00 - 0x64
+0x0d	AFTER TOUCH MODE SELECT	0x00 = VCF Frequency
+				0x01 = VCO LFO-2 MOD (1 and 2)
+0x0e	LFO-2 RATE		0x00 - 0x64
+*/
+
+PGR (Program number) which Indicates the 'Tone Number* Byte	Description
+
+
+switch(c)
+{
+	case 0xf0: goto RID; break;		
+}
+
+RID:	spi.uart.read(1,&c,1); if(c!=0x81) goto ERR;	// Roland ID
+IPR:	spi.uart.read(1,&c,1); if(c!=0x36) goto ERR;	// Operation code 3 = IPR (individual parameter)
+	spi.uart.read(1,&c,1);
+	if((c!=midi_channel[UPPER])&&(c!=midi_channel[LOWER])) goto ERR;
+	spi.uart.read(1,&c,1); if(c!=0x20) goto ERR;	// Format type
+0x30	0011 0000	Level 0 3 2		
+0x0-	0000 OOgg	Group: gg=01 Upper Patch, gg=10 Lower Patch
+0x--	Oppp pppp	Parameter ( 0 — 47 )
+0x--	Ovvv vvvv	Value	( 0 - 100 )
+EOX:	0xF7	1111 0111	End of System Exclusive
+ERR:
+
+
+
+	h	Ovvv	vvvv	values (0 - 100) of parameter 8 0 - 47
+
+
+
+8-Voice Sound module
+model MKS-80 MIDI Implementation
+
+1 RECOGNIZED RECEIVE DATA
+1.1 When the MIDI FUNCTION is set at I
+
+Status		Second		Third		Description			
+1000 nnnn	Okkk kkkk	Ovvv vvvv	Note OFF. Velocity ignored		
+1001 nnnn	Okkk kkkk	0000 0000	Note OFF. kkkkkkk = 0 - 127 (21 - 108)
+1001 nnnn	Okkk kkkk	Ovvv vvvv	Note ON.  kkkkkkk = 0 - 127 (21 - 108)
+1011 nnnn	0100 0000	01XX xxxx	Hold ON  xxxxxx = 0 - 63			
+1011 nnnn	0100 0000	OOxx xxxx	Hold OFF xxxxxx = 0 - 63			
+1011 nnnn	0111 1011	0000 0000	ALL NOTES OFF			
+1011 nnnn	0111 1100	0000 0000	OMNI OFF
+1011 nnnn	0111 1101	0000 0000	OMNI ON
+1011 nnnn	0111 1110	0000 mmmm	MONO ON. mmmm = 1			
+1011 nnnn	0111 1111	0000 0000	POLY ON
+1111 1110					Active Sensing			
+
+1.2 When the MIDI FUNCTION is set at II
+
+Status		Second		Third		Description			
+1011 nnnn	0000 0001	Ovvv vvvv	Modulation vvvvvvv = 0 - 127
+1011 nnnn	0000 0111	Ovvv vvvv	Volume vvvvvvv = 0 — 127
+1011 nnnn	0001 1111	Ovvv vvvv	Bender Sensitivity vvvvvvv = 0 — 127
+1100 nnnn	Oppp PPPP			Program change ppppppp = 0 - 127
+						On MIDI channel n : Upper Tone
+						On MIDI channel n + 1 : Lower Tone
+1101 nnnn	Ovvv vvvv			Channel After Touch vvvvvvv = 0 — 127
+1110 nnnn	Ovvv vvvv	Ovvv vvvv	Pitch Bender Change
+1111 0110					Tune Request
+
+1.3 When the MIDI FUNCTION is at 111
+
+
+2
+Tune Roqucstand Exclusive Messages will bo sont in addition to the messages described In 2.1. The Program Change is not internally o r ig ina ted.
+3.	TRANSMITTED EXCLUSIVE MESSACES
+Status		Second		Third		Description			
+1000	nnnn	Okkk	kkkk	Ovvv	vvvv	Note OFF. velocity	i gno red		
+1001	nnnn	Okkk	kkkk	0000	0000	Note OFF kkkkkkk = 0 - 127	<21	- 108)	*1
+1 001	nnnn	Okkk	kkkk	Ovvv	vvvv	Note ON kkkkkkk 3 0 - 127 vvvvvvv 3 1 — 127	<21	- 1 08)	*1
+toil	nnnn	0100	0000	01 XX	xxxx	Ho 1d ON xxxxxx = 0 - 63			
+1011	nnnn	0100	0000	OOxx	xxxx	Ho 1d OFF xxxxxx = 0 - 63			
+1011		0111	1011	0000	0000	ALL NOTES OFF			
+1011	nnnn	0111	1 100	0000	0000	OMNI OFF			*2
+1011	nnnn	0111	1101	0000	0000	OMNI ON			*2
+1011	nnnn	0111	1110	0000	mmmm	MONO ON			*2
+						mmmm = 1			
+101 1	nnnn	0111	1 1 1 1	0000	0000	POLY ON			*2
+mi	1110					Ac t ive Sens ing			
+	Notes								
+*1 Note numbers outside of the range 21 - 108 are transposed to the nearest octave inside this range.
+3.1 When the Tone Parameters are changed while the MIDI FUNCTION is set at III. the following exclusive message (IPR) is sent.
+Byte
+Descrip t Ion
+a 1111	0000
+b 0100 0001 c 0011 0110 d 0000 nnnn
+e 0010 0000 f 0010 0000
+g 0000 00gg
+h Oppp pppp l Ovvv vvvv
+j 1111 0111
+No te
+Pa rame ter 0 Eune t ion
+Exclusive status Roland U) 0
+Operation code — IPR (Individual parameter)
+Unit n = MIDI basic channel, nnnn = 0 - 15
+where nnnn ♦ I = channel 0
+Fo rma t type
+Lave 10=1
+Croup O
+gg = 01	: Upper lone
+gg = 10 : Lower Tone Parameter 0 < 0 - 47 )
+Value ( 0 - 100 ) h and i ( repetitively )
+End of System Exclusive
+*2 Mode Messages <123 - 127) are also rocognlzod as ALL NOTES OFF. MONO ON messages in which mmmm = 0 or 2 - 15 are ignored.
+Modo Messages
+OMNI OFF <124) OMNI ON <125)
+are recognized : POl.Y ON <127)
+: OMNI = OFF : POLY
+: OMNI = ON : POLY
+s foilows:
+: MONO ON <12G) mmmm —	1
+: OMNI 3 OFF : MONO
+: OMNI = ON : MONO
+MONO ON <126> mmmm <> I
+: Ignored : (no t changed)
+: i gno red
+(no t changed)
+1.2 When the MIDI FUNCTION is at II
+Modulation. Volume. Bender Sens. Program Change. Channel After Touch. Pitch Bonder and Tune Request are rncognizod in addition to the messages described In I. 1.
+	Note				
+8* )
+The Program Change number in the basic channel is recognized as an Upper “Tone Number' and that in the basic channu I ♦ 1 as a Lower one.
+1.3 When the MIDI FUNCTION is .» t III
+EXCLUSIVE messages and the messages described in 2 2 are recognized. The Program Change number only -n the basic channel is recognized as a 'Pa tch Number’
+The Program Change assignments
+Prog 0	Number (see
+MEMORY AREA switch note) INT	A
+B
+0 -	63 :	11 - 88
+64 - 127 : 11-88
+No te :
+MIDI f une t ion
+Internal	cart A
+curt A	cari B
+cart B Internal
+Numbe r
+I I I I I
+’ T o n o N u mb e r "
+* Pa tch Numbe r'
+2	TRANSMITTED DATA
+2. 1 When the MIDI FUNCTION Is at I
+Only messages received from MIDI IN are sent to MIDI OUT. No messages are Internally originated.
+2.2 When the MIDI FUNCTION is at II
+Program Change and Tune Request will be sent in addition to the messages desdribed in 2.1.
+Sta tus	Second	Th 1 rd	Description
+1100 nnnn	Oppp pppp		Program Change ppppppp = 0 - 63
+1111 0110			Tune Request
+o f 8* )
+3.2 When the Patch Parameters are changed while the MIDI FUNCTION is set at III. the following exclusive message (IPR) Is sent.
+Notes
+nnnn MIDI channel number ( 0000 — 1111 ). ch-l = 0000
+When the 'Patch Number' is changed. Program Change messages are transmitted in the basic channel for the Upper 'Tone Number' d e f I ne d by tho 'Patch Number', and in 
+
+the basic channel + 1 for the Lower 'Tono Number'
+When the 'Tone Number' Is changed, a Program Change mossago is transmitted In the basic channel for the Upper 'Tone Number', or In tho basic channel ♦ l for the Lower 
+
+one. according to the pano I sotting.
+a	1111	0000	Exc1 us ive status		
+b	0100	0001	Roland IDO		
+c	001 1	0110	Operation code 3	I PR (individual	pa rame 1er)
+d	0000	nnnn	Unit « = MIDI basic channel, nnnn		3 0 - 15
+			whore nnnn ♦ 1 =	channe1 0	
+e	0010	0000	Fo rma t typo		
+f	001 1	0000	Le ve 1 0 3 2		
+g	0000	OOgg	Group 0		
+byte	desc r ip t ion
+gg 3 01 Upper Patch gg 3 10 : Lower Patch
+h	Oppp pppp	Parameter 8 ( 0 — 14 >		e	0010	0000	Fo rma t type
+1	Ovvv vvvv	Value	( 0 - 108 >	f	0010	0000	l.ovol 8 = 1
+		h and	l ( rape t i t ive1 y )	«	0000	0010	Group 8 = Lowe r
+J	1111 0111	End of	Systom Exclusive	h	Ovvv	vvvv	values (0 - 100) of parameter 8 0 - 47
+Note	Pa r amet e r 8 Func t ion		Value	1	Ovvv 11 I 1	vvvv Oil 1	in sequence, (48 bytes total) End of System Exclusive
+3.4 When the 'Tone \umbnr’ is changed while the MIDI FUNCTION Is set at III. the following exclusive messages (A and B> are sent
+
+
+PRG: 0xF0  0x41  0x34  0x0n  0x20  0x00  0x00 { patch number } 0x00  0x7F
+APR: 0xF0  0x41  0x35  0x0n  0x20 { level }{ group }{ value } ...  0x7F 
+	Level: 0x20=Tone,  0x30=Patch
+	Group: 0x01=Upper, 0x02=Lower
+IPR: 0xF0  0x41  0x36  0x0n  0x20 { level }{ group }{ param, value } ...  0x7F
+	Level: 0x20=Tone,  0x30=Patch
+	Group: 0x01=Upper, 0x02=Lower
+WSF: 0xF0  0x41  0x40  0x0n  0x20  0x4D  0x4B  0x53  0x2D  0x38  0x30  0x00  0x7F
+RQP: 0xF0  0x41  0x41  0x0n  0x20  0x4D  0x4B  0x53  0x2D  0x38  0x30  0x00  0x7F
+DAT: 0xF0  0x41  0x42  0x0n  0x20 { set 1 }{ set 2 }{ set 3 }{ set 4 }  0x00  0x7F
+	Set: Tone + Patch
+ACK: 0xF0  0x41  0x43  0x0n  0x7F
+EOF: 0xF0  0x41  0x45  0x0n  0x7F
+ERR: 0xF0  0x41  0x4E  0x0n  0x7F
+RJC: 0xF0  0x41  0x4F  0x0n  0x7F
+
+
+In the Save mode:
+	Synth -> MPG	WSF
+	MPG -> Synth	ACK
+	Synth -> MPG	DAT
+	MPG -> Synth	ACK
+	Synth -> MPG	DAT
+	MPG -> Synth	ACK
+	...
+	Synth -> MPG	DAT
+	MPG -> Synth	ACK
+	Synth -> MPG	EOF
+	MPG -> Synth	ACK
+
+
+IPR (Individual parameter)
+	0xF0	// Start of Exclusive
+	0x41	// Roland ID
+	opcode	// Operation code: 0x34=PRG, 0x35=APR, 0x36=IPR
+	0x0n	// MIDI channel
+	0x20	// Format type
+	level	// Level: 0x20=Tone,  0x30=Patch
+	group	// Group: 0x01=Upper, 0x02=Lower
+	0x00	// Next program number indicates the Patch
+	Ox00 - 0x7F	// Patch number
+	0x00	// NOP
+	0x7F	// EOX
+
+
+PGR (Program number) which indicates the Tone Number
+	0xF0	// Start of Exclusive
+	0x41	// Roland ID
+	0x34	// Operation code = PRG
+	0x0n	// MIDI channel
+	0x20	// Format type
+	0x30	// Level = 2
+	0x00	// Dummy
+	0x00	// Next program number indicates the Patch
+	Ox00 - 0x7F	// Patch number
+	0x00	// NOP
+	0x7F	// EOX
+
+APR (All Parameter)
+	0xF0	// Start of Exclusive
+	0x41	// Roland ID
+	0x35	// Operation code = APR
+	0x0n	// MIDI channel
+	0x20	// Format type
+	level	// Level: 0x20=Tone,  0x30=Patch
+	group	// Group: 0x01=Upper, 0x02=Lower
+	0x--	// Value for parameter 0
+	...
+	0x--	// Value for parameter n (14 parameters for patch, 47 parameters for tone)
+	0xF7	// EOX
+
+APR (All Parameter) for the upper section patch
+	0xF0	// Start of Exclusive
+	0x41	// Roland ID
+	0x35	// Operation code = APR
+	0x0n	// MIDI channel
+	0x20	// Format type
+	0x30	// Level = 2
+	0x01	// Group = 1 (Upper)
+	0x--	// Parameter 0
+	...
+	0x--	// Parameter 14
+	0xF7	// EOX
+
+APR (All Parameter) for the lower section patch
+	0xF0	// Start of Exclusive
+	0x41	// Roland ID
+	0x35	// Operation code = APR
+	0x0n	// MIDI channel
+	0x20	// Format type
+	0x30	// Level = 2
+	0x02	// Group = 2 (Lower)
+	0x--	// Parameter 0
+	...
+	0x--	// Parameter 14
+	0xF7	// EOX
+
+APR (All Parameter) for the lower section tone
+	0xF0	// Start of Exclusive
+	0x41	// Roland ID
+	0x35	// Operation code = APR
+	0x0n	// MIDI channel
+	0x20	// Format type
+	0x20	// Level = 1
+	0x01	// Group = 1 (Upper)
+	0x--	// Parameter 0
+	...
+	0x--	// Parameter 47
+	0xF7	// EOX
+
+APR (All Parameter) for the upper section tone
+	0xF0	// Start of Exclusive
+	0x41	// Roland ID
+	0x35	// Operation code = APR
+	0x0n	// MIDI channel
+	0x20	// Format type
+	0x20	// Level = 1
+	0x02	// Group = 2 (Lower)
+	0x--	// Parameter 0
+	...
+	0x--	// Parameter 47
+	0xF7	// EOX
+
+
+Exclusive status Roland ID 8
+Operation code = PGR (program number)
+Unit II = MIDI basic channel, nnnn = 0 - IS where nnnn ♦ 1 = channel 8 Ko rma t type I.eve I 8 = I Croup 8
+gg = 01 Upper lone g g = 10 Lower lone
+\nxl program number indicates the 'lone Number' Program 8 (' lone Number*'
+NOP
+End of System hxi Luslve
+B. APR (All parameter) which tho 'Tone Number*
+indicates the All parameters for
+a	11 11	0000	Exclusive status	
+b	0100	000 1	Roland 1D 8	
+c	0011	0101	Ope ration code	= APR (all par amt. 1er)
+d	0000	nnnn	Unit 8 = MIDI	basic channel, nnm. = 0
+			where nnnn ♦ 1	= channel 8
+0	0010	000(1	Fo rma t type	
+f	0010	0000	Level 8 = |	
+«	0000	OOgg	Croup 8 gg = 01 Upper	lone
+			gg = 10 1 owe r	Tone
+h	Ovvv	vvvv		
+Rescript ion
+values (0 - 100) of parameter In sequence. (48 bytes total)
+8 0 - 47
+Qvvv vvvv 1111 0111
+End of System Exclusive
+3.3 Whan the 'Patch Number’ is changed while the MIDI FUNCTION la set at III. the following exclusive messages (A through E) are sent In sequence.
+4.
+RECOCNIZED EXCLUSIVE MESSAGES
+PGR (Program number) which indicates tho ’Patch Number*
+All Exclusive messages described In section 3. 5.	HANDSHAKING COMMUNICATION
+a	11 11	0000	Exclus Ive s ta tus		
+b	0100	0001	Roland ID 8		
+c	0011	0100	Operation code = PGR (program	numb e r)	
+d	0000	nnnn	Unit 8 = MIDI basic channel.	nnnn = 0 —	15
+			where nnnn + 1 = channol 8		
+e	0010	0000	Format typo		
+f	001 1	0000	Love 1 8 3 2		
+g	0000	0000	Dummy		
+h	0000	0000	Next program number Indicates	the 'Pa tch	Numbe r
+1	Oppp	pppp	Program 8 (’Patch Number’)		
+J	0000	0000	NOP		
+k	! 1 1 1	01 1 1	End of System Exclusive		
+Desc r Ip t ion
+5. 1 Message type
+5.1.1 Want to send a file (WSF)
+B. APR (All parameter) which indicates the Patch Parameters for Upper section
+Doser ip t ion
+a	1 1 1 1	0000
+b	0100	0001
+c	001 1	0101
+d	0000	nnnn
+0	0010	0000
+f	001 1	0000
+I	0000	0001
+h	Ovvv	vvvv
+	î Ovvv	vvvv
+1	1 11 1	011 1
+Exclusive status Roland ID «
+Operation code = APR (all parameter)
+Unit II = MIDI basic channol, nnnn = 0
+where nnnn ♦ 1 = channel 8
+Format typo
+Level 8 = 2
+Croup II * Upper
+a	1111	0000	Exclusive status
+b	0100	0001	Roland ID 8
+c	0100	0000	Ope ration code
+d	0000	nnnn	Unit 8 MIDI basic chennel, nnnn = where nnnn = 0 for channel
+e	00 io	0000	Format type
+f	0100	1101	M :
+	0100	1011	K :
+	0101	0011	S : - FI lo name In ASCI I
+	0010	1101	- :
+	001 1	1000	8 :
+	0011	0000	0 :
+8	0000	0000	Check sum
+h	1111	0111	End of Systern Exclusive
+2 Reques		t a fila (RQF)	
+Dose rIp t 1 on
+values (0 - 108) of parameter in sequence, (15 bytes total)
+II 0
+End of System Exclusive
+APR (All parameter) which indicates the Patch Parameters for Lowsr section
+a	till	0000	Excluslve status	
+b	0100	0001	Roland ID 8	
+c	001 1	0101	Operation code = APR (all parameter)	
+d	0000	nnnn	Unit 8 = MIDI basic channol, nnnn = where nnnn * 1 = channel 8	0 -
+e	0010	0000	Format type	
+f	001 1	0000	Level 8 3 2	
+K	0000	0010	Group 8 — Lowe r	
+h	Ovvv	vvvv	values (0 — 108) of parameter 8 0 — in sequence, (15 bytes total)	14
+	Ovvv	vvvv		
+l	1111	01 1 1	F.nd of System Exclusive	
+APR (All		parameter) which indicates the Tone Parameters		
+Uppe r sect Ion				
+	By te		Description	
+a	1 1 1 1	0000	Exclusive status	
+b	0100	000 1	Roland ID 8	
+c	00 1 1	0101	Operation code = APR (all parameter)	
+d	0000	nnnn	Unit 8 3 MIDI basic channel, nnnn = where nnnn ♦ l = channol 8	0 -
+e	0010	0000	Format type	
+f	0010	0000	Le vol a = i	
+g	0000	0001	Group n = Upper	
+h	Ovvv	vvvv	values (0 - 100) of parameter 80” In sequence, (48 byl"8 total)	47
+	Ovvv	vvvv		
+l	1 1 1 1	0111	End of System Exclusive	
+APR (All		parameter) which indicates the Tone Parameters		
+Lower se		ic t 1 on		
+	By te		Desc r ip t ion	
+a	1111	0000	Exc1 us ive s ta tus	
+b	0100	0001	Roland ID 8	
+c	001 1	0101	Operation code = APR (all parameter)	
+d	0000	nnnn	Unit 8 = MIDI basic channel, nnnn =	0 -
+Byte
+Description
+where nnnn ♦ 1
+channel 8
+a	1 1 1 1	0000	Exclusive status	
+b	0100	0001	Ro 1 and ID 8	
+c	0100	0001	Ope ration code	
+d	0000	nnnn	Un l t 8	
+			MIDI basic chennol,	nnnn =
+			where nnnn - 0 for	channe1
+e	0010	0000	Format type	
+f	0100	1101	M :	
+	0100	101 1	K :	
+	0101	001 1	S : — File name In	ASCI 1
+	0010	1 101	- :	
+	001 1	1000	8 :	
+	001 1	0000	0 :	
+(	0000	0000	Check sum	
+h	1111	Oil 1	End of System Exclusive	
+Desc r ip t ion
+5. 1. 3 Data (DAT)
+a	1 1 1 1	0000	Excluslve s ta tus	
+b	0100	0001	Roland ID 8	
+c	0100	0010	Operation code	
+d	0000	nnnn	Uni t 8 MIDI basic chennel.	nnnn -
+			where nnnn — 0 for	channeI
+e	0010	0000	Fo rma t type	
+f	Oddd	dddd	Data 248 bytes = 4	sets of
+	Oddd	dddd		
+K	Osss	s s s s	Check sum	
+h	1 1 1 1	01 1 1	End of Systom Exclusive	
+Notes :				
+Desc r Ip t ion
+b e
+Summed value of the all bytes In data and the check sum must (7 b1ts).
+Each DAT message consists of 4 sets of the Patch and Tone data.
+Each data set consists of G2 bytes total 	 39 bytes for Tone
+Parameters of a number and 23 bytes for Patch Parameters of the same number.
+Thoso parameters are sent In sequence of the 'Tone Number's and; 'Patch Number's. 2 DATs are sont for each 'Bank'
+In normal operation. 16 DATs aro totally sent for all ‘bank’s
+(1 - 8).
+5. 1. 4 Acknowledgo
+<ACK>
+Note :
+Byte
+Dater Ip t ion
+Pa rame ter
+Type of Exclut ive metttfa Value In DAT Value In I PR
+a 1111 0000 b 0100 0001 c 0100 0011 d 0000 nnnn
+e 0010 0000 f 1111 0111
+Exclut Iva statue Roland ID O Ope ration code Unit 0
+MIDI basic chennal, nnnn «0-15 whore nnnn = 0 for channel I Fo rmat type
+End of System Exclusive
+* SPLIT POINT
+0-87
+21 - 108
+b
+Upper Tone Number < 1 byte ) 43	0-63
+5. 1. 5 End of file (EOF)
+By te
+Description
+a 1111 0000 b 0100 0001 c 0100 0101 d 0000 nnnn
+e 0010 0000 f 1111 0111
+Exclus ivo s ta tus Roland ID 0 Operation code Un It 0
+MIDI basic channel, nnnn = 0 where nnnn = 0 for channel 1 Format type
+End of System Exclusive
+15
+5. 1. 6 Commun lest Ion error (ERR)
+a	1 1 1 1	0000
+b	0100	0001
+c	0100	1110
+d	0000	nnnn
+«	0010	0000
+f	1111	01 1 1
+Re Ject ion <F		
+	byte	
+a	1 1 1 1	0000
+b	0100	0001
+c	0100	1111
+d	0000	nnnn
+e	0010	0000
+f	1111	01 1 1
+Desc rIp t Ion
+Exclusive status Ro1 and ID 0 Operation code Unit 0
+MIDI basic chennel. nnnn = 0 where nnnn — 0 for channel 1 Fo rma t type
+End of System Exclusive
+descr ipt ion
+Exclusive status Ro land ID 0 Ope ration code Un l t 0
+MIDI basic chennel. nnnn ■ 0 whore nnnn ■ 0 for channel 1 Format typo
+End of System Exclusive
+: bit 0-2 ASSIGN MODE SELECT :	
+: 000 ■ So 1o : : 001 ■ Unison—1 : : 010 = Unlson-2 : : 011= Poly-1 : : 100 = Poly-2 :	
+	
+	bit 0.1 HOLD
+	00	= OFF 01	- ON ( always ) 10 = by damper messages
+	
+bit 2.3 VCO-2 BEND	bit 0.1 VCO-1 BEND
+00	- OFF 01	= Normal 10 - Wide	00	■ OFF 01	» No rma1 10 = Wide
+	
+bit 1-3 OCT SHIFT	bit 0 AFTER TOUCH MODE SELECT
+000	= 2 OCT Down 001	= 1 OCT Down 010	= Normal 011	■ l OCT Up 100 = 2 OCT Up	0	= VCF Frequency 1	= VCO LFO-2 MOD
+d
+< 5 bytes.	va 1 ue	* 0 -	too :
+51	AFTER	TOUCH	SENS
+52	LFO-2	RATE	
+Upper continuous values
+48	UNISON DETUNE
+49	GLIDE
+50	BENDER SENS
+e Lower Tone Number < 1 byte ) 53	0-63
+5.2 Data format of DAT <62 bytes total)
+5. 2. 1 Tone section ( 39 bytes )
+a Continuous values < 33 bytes, value = 0 - 100 )
+1	LFO-I RATE
+2	LFO-1 DELAY TIME
+3	VCO MOD LFO-1 DEPTH
+4	VCO MOD ENV-1 DEPTH
+5	PV
+6	PWM
+7	VCO KEY FOLLOW
+8	XMOD MANUAL DEPTH
+9	XMOD ENV-1 DEPTH *1 10 VCO-1 RANCE
+*2 11 VCO-2 RANGE
+12	VCO-2 FINE TUNE
+13	MIXER
+14	HPF CUTOFF FREO
+15	VCF CUTOFF FREQ
+16	VCF RESONANCE
+17	VCF MOD ENV DEPTH
+18	VCF MOD LFO-1 DEPTH	
+19	VCF KEY FOLLOW	
+20	VCA ENV-2 LEVEL	
+21	VCA MOD LFO-1 DEPTH	
+22	DYNAMICS TIME	
+23	DYNAMICS LEVEL	
+24	ENV-1	A
+25	ENV-1	D
+26	ENV-1	S
+27	ENV-1	R
+28	ENV-1	KEY FOLLOW
+29	ENV-2	A
+30	ENV-2	D
+31	ENV-2	S
+32	ENV-2	R
+33	ENV-2	KEY FOLLOW
+f Lower bit data < 4 bytes )
+54 - 57	The same as Upper SW data.
+g Lower continuous values < 5 bytes, value ■ 0 - 100 )
+58 «UN I SON DETUNE	61 AFTER TOUCH SENS
+59	CLIDE	62 LFO-2 RATE
+60	BENDER SENS
+5.3 Sequenco of communication
+Note :
+Pa rame ter
+Type of Exclusive message Value In DAT Value In 1 PR
+*1	10	VCO-1	RANCE	0-48	36 - 84
+*2	1 1	VCO-2	RANGE	0 1 - 49	0 36 - 84
+50	100
+b
+B 1 t 34
+35
+36
+bit 2.3 PWM MODE SEL	bit 0.1 LFO-1 WAVEFORM
+00	* Keyboard 01	= LFO-1 10 - ENV-1	00	■ Random 01	■ Square Wave 10	= Sawtooth Wave 11	- Triangle Wave
+	
+bit 2.3 VCO SEL : b k t 1 XMOD POL : bit 0 PWM POL	
+00	= VCO-2 0 = Inverted 0 ■ Inverted 01	= OFF : 1 m Normal : 1 * Normal 10 = VCO-l ; :	
+	
+bit 2.3 VCO-2 MOD	bit 0.1 VCO-1 MOD
+00	= Inverted 01	« OFF 10 = Normal	00	= Inver ted 01	= OFF 10 = Normal
+data ( 6 bytes ) bits 4-7 are not used
+I n	the Save	mode.	
+a	WSF :	Wan t to send a file	(transmitted)
+b	ACK :	Acknow ledge	(received)
+c	DAT :	Da ta	(transmitted)
+	ACK :	Acknowledge	(rece ived)
+	DAT :	Da ta	(t ransm i t ted)
+	DAT :	Da ta	(transmitted)
+	ACK :	Acknowlodge	(receIved)
+d	EOF :	End of file	(t ransm it ted)
+e	ACK :	Acknowledge	(race Ived)
+In	the Load	mode.	
+a	RQF :	Reques t a file	(transmltted)
+b	DAT :	Da ta	(rece ived)
+c	ACK :	Acknowledge	(transmlt ted)
+	DAT :	Da ta	(rece ive r)
+	ACK :	Acknowledge	( t ransm i t ted)
+	DAT :	Da ta	(rece ived)
+	ACK :	Acknowledge	
+d	EOF :	End of file	(rece ived)
+e	ACK :	Acknowledge	(t ransmi tted)
+5.3.3 When the WSF is recognized
+a	WSF :	Want to send a file	(rece ived)
+b	ACK :	Acknowledge	< t ransmit ted)
+c	DAT :	Da ta	(receIved)
+	ACK :	Acknowledge	(transmitted)
+	DAT :	Da ta	(rece ived)
+5.
+37
+b i t	3	: bit	2	bit 1	bit 0
+ENV-2	DYNAMICS:ENV-1		DYNAMICS	VCF ENV POL	VCF ENV SEL
+0 =	OFF	: 0 =	OFF	0 = 1 nvor ted	0 = ENV-2
+l ■	ON : 1 *		ON	I ■ Normal	1 = ENV-1
+38
+39
+bit 2.3 VCO-2 WAVEFORM	bit 0.1 VCO-1 WAVEFORM
+00	= No i s e 01	» Pulse Wave 10	= Sawtooth Wave 11	= Triangle Wave	00	= Square Wave 01	= Pulse Wave 10	= Sawtooth Wave 11	= Triangle Wave
+	
+blt 2 ENV RESET	bit 0.1 VCO SYNC
+0	■ OFF 1	■ ON	00	= VCO-1 <- VCO-2 01	■ OFF 10 ■ VCO-1 -> VCO-2
+	DAT :	Data	(rece ived)
+	ACK :	Acknowledgo	(t ransm i tted)
+d	EOF :	End of file	(rece Ived)
+e	ACK :	Acknowledge	(t ransm i t ted)
+When the RQF		is recognized	
+a	RQF î	Reques t a file	(received)
+b	DAT :	Data	(transmitted)
+c	ACK :	Acknowledge	(rece Ived)
+	DAT :	Data	(transmltted)
+	ACK :	Acknowledge	(rece Ived)
+	DAT :	Data	(transmltted)
+	ACK :	Acknowledge	(received)
+d	EOF :	End of file	(t ransmitted)
+e	ACK :	Acknow ledge	(rece Ived)
+5.3.5 When the ERR Is recognized
+DAT :	Data	(transmlt ted)
+ACK :	Acknowledge	(received)
+DAT :	Data	(transmitted)
+a ERR :	Communication error	(received)
+b RJC :	Re Jec t Ion	(transmitted)
+S. 2. 2 Patch section < 23 bytes )
+a Common data < 3 bytes )
+40	KEY MODE	0 ■ DUAL
+1	■ SPI.1T-1
+2	= SPLIT-2
+3	= WHOLE
+*	41	SPLIT POINT	0-87
+42	BALANCE	0-100
