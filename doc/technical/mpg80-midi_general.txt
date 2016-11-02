@@ -1,8 +1,8 @@
 GENERAL DESCRIPTION OF MPG-80 SYSEX MIDI MESSAGES
 
-PRG = Program message
+PRG = Program Number message
         0xF0 0x41 0x34 0x0n 0x20 0x00 0x00 { patch number } 0x00 0x7F
-
+	
 APR = All Parameters message
         0xF0 0x41 0x35 0x0n 0x20 { level }{ group }{ value } ... 0x7F 
 	        Level: 0x20=Tone,  0x30=Patch
