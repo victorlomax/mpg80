@@ -1,35 +1,47 @@
 MKS-80 MIDI Implementation
 
 1 RECOGNIZED RECEIVE DATA
-1.1 When the MIDI FUNCTION is set at I
 
-Status		Second		Third		Description			
-1000 nnnn	Okkk kkkk	Ovvv vvvv	Note OFF. Velocity ignored		
-1001 nnnn	Okkk kkkk	0000 0000	Note OFF. kkkkkkk = 0 - 127 (21 - 108)
-1001 nnnn	Okkk kkkk	Ovvv vvvv	Note ON.  kkkkkkk = 0 - 127 (21 - 108)
-1011 nnnn	0100 0000	01XX xxxx	Hold ON  xxxxxx = 0 - 63			
-1011 nnnn	0100 0000	OOxx xxxx	Hold OFF xxxxxx = 0 - 63			
-1011 nnnn	0111 1011	0000 0000	ALL NOTES OFF			
-1011 nnnn	0111 1100	0000 0000	OMNI OFF
-1011 nnnn	0111 1101	0000 0000	OMNI ON
-1011 nnnn	0111 1110	0000 mmmm	MONO ON. mmmm = 1			
-1011 nnnn	0111 1111	0000 0000	POLY ON
-1111 1110					Active Sensing			
+1 = When the MIDI FUNCTION is set at I
+2 = When the MIDI FUNCTION is set at II
+3 = When the MIDI FUNCTION is set at III
 
-1.2 When the MIDI FUNCTION is set at II
+Status		Second		Third		1 2 3	Description			
+1000 nnnn	0kkk kkkk	0vvv vvvv	X X X	Note OFF. Velocity ignored		
+1001 nnnn	0kkk kkkk	0000 0000	X X X	Note OFF. kkkkkkk = 0 - 127 (21 - 108)
+1001 nnnn	0kkk kkkk	0vvv vvvv	X X X	Note ON.  kkkkkkk = 0 - 127 (21 - 108)
+1011 nnnn	0000 0001	Ovvv vvvv	  X X	Modulation vvvvvvv = 0 - 127
+1011 nnnn	0000 0111	Ovvv vvvv	  X X	Volume vvvvvvv = 0 — 127
+1011 nnnn	0001 1111	Ovvv vvvv	  X X	Bender Sensitivity vvvvvvv = 0 — 127
+1011 nnnn	0100 0000	01xx xxxx	X X X	Hold ON  xxxxxx = 0 - 63			
+1011 nnnn	0100 0000	00xx xxxx	X X X	Hold OFF xxxxxx = 0 - 63			
+1011 nnnn	0111 1011	0000 0000	X X X	ALL NOTES OFF			
+1011 nnnn	0111 1100	0000 0000	X X X	OMNI OFF
+1011 nnnn	0111 1101	0000 0000	X X X	OMNI ON
+1011 nnnn	0111 1110	0000 mmmm	X X X	MONO ON. mmmm = 1			
+1011 nnnn	0111 1111	0000 0000	X X X	POLY ON
+1100 nnnn	0ppp ppp			  X X	Program change ppppppp = 0 - 127
+								On MIDI channel n : Upper Tone
+								On MIDI channel n + 1 : Lower Tone
+1101 nnnn	0vvv vvvv			  X X	Channel After Touch vvvvvvv = 0 — 127
+1110 nnnn	0vvv vvvv	0vvv vvvv	  X X	Pitch Bender Change
+1111 0000	0100 0001	...		    X	System Exclusive Message	
+1111 0110					  X X	Tune Request
+1111 1110					X X X	Active Sensing			
 
-Status		Second		Third		Description			
-1011 nnnn	0000 0001	Ovvv vvvv	Modulation vvvvvvv = 0 - 127
-1011 nnnn	0000 0111	Ovvv vvvv	Volume vvvvvvv = 0 — 127
-1011 nnnn	0001 1111	Ovvv vvvv	Bender Sensitivity vvvvvvv = 0 — 127
-1100 nnnn	Oppp PPPP			Program change ppppppp = 0 - 127
-						On MIDI channel n : Upper Tone
-						On MIDI channel n + 1 : Lower Tone
-1101 nnnn	Ovvv vvvv			Channel After Touch vvvvvvv = 0 — 127
-1110 nnnn	Ovvv vvvv	Ovvv vvvv	Pitch Bender Change
-1111 0110					Tune Request
-
-1.3 When the MIDI FUNCTION is at 111
+3.	TRANSMITTED EXCLUSIVE MESSACES
+1000 nnnn	0kkk kkkk	0vvv vvvv	Note OFF. velocity	i gno red		
+1001 nnnn	0kkk kkkk	0000 0000	Note OFF kkkkkkk = 0 - 127	<21	- 108)	*1
+1001 nnnn	0kkk kkkk	0vvv vvvv	Note ON kkkkkkk 3 0 - 127 vvvvvvv 3 1 — 127	<21	- 1 08)	*1
+1011 nnnn	0100 0000	01xx xxxx	Ho 1d ON xxxxxx = 0 - 63			
+1011 nnnn	0100 0000	00xx xxxx	Ho 1d OFF xxxxxx = 0 - 63			
+1011		0111 1011	0000 0000	ALL NOTES OFF			
+1011 nnnn	0111 1100	0000 0000	OMNI OFF			*2
+1011 nnnn	0111 1101	0000 0000	OMNI ON			*2
+1011 nnnn	0111 1110	0000 mmmm	MONO ON			*2
+						mmmm = 1			
+1011 nnnn	0111 1111	0000 0000	POLY ON			*2
+1111 1110					Ac t ive Sens ing			
 
 
 2
