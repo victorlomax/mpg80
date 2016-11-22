@@ -57,7 +57,8 @@ ATMega pins used:
   
 10 - 2 * 6N135 (optocoupler)
 
-11 - 29 * linear sliders (10K)
+11 - 29 * Bourns PTA3043-2015CPB103 (10 K linear sliders)
+  * Datasheet: http://www.bourns.com/docs/Product-Datasheets/pta.pdf
 
 12 - 11 * potentiometers (10K)
 
