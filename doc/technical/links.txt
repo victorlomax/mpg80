@@ -1,0 +1,7 @@
+General interest links
+
+Dual-UART Shield
+  http://hackstrich.sen.cx/File:MultiSerial_Shield_Schematic.png
+
+Other Dual-UART
+  http://www.digikey.ca/product-search/en?keywords=MAX3222CWN%2B-ND
