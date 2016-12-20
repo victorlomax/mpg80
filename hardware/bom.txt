@@ -60,7 +60,8 @@ ATMega pins used:
 11 - 29 * Bourns PTA3043-2015CPB103 (10 K linear sliders)
   * Datasheet: http://www.bourns.com/docs/Product-Datasheets/pta.pdf
 
-12 - 11 * potentiometers (10K)
+12 - 11 * Bourns PTV09A-4015U103 (10 K potentiometers)
+  * Datasheet: http://www.bourns.com/docs/Product-Datasheets/ptv09.pdf
 
 13 - 60 * white LEDS
   * Note 1: The max number of simulateously lit white LED is 32. 
@@ -73,3 +74,9 @@ ATMega pins used:
   * Source: BuyDisplay.com, Price=$ 2.15
 
 16 - 35 * tactile switches, replacing the original sliding selectors
+
+17 - 1 * GRS-4011-0076 from CW Industries (Rocker switch)
+   * Rocker Switch SPST 16A (AC) 125V Panel Mount, Snap-In
+   * Datasheet: http://switches-connectors-custom.cwind.com/Asset/GRS-4011-XXXX.pdf
+   * Source: Digikey P/N=SW323-ND , Price=1.45 CAD
+   
