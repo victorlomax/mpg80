@@ -58,20 +58,20 @@ ATMega pins used:
 10 - 2 * 6N135 (optocoupler)
 
 11 - 29 * Bourns PTA3043-2015CPB103 (10 K linear sliders)
-  * Datasheet: http://www.bourns.com/docs/Product-Datasheets/pta.pdf
+   * Datasheet: http://www.bourns.com/docs/Product-Datasheets/pta.pdf
 
 12 - 11 * Bourns PTV09A-4015U103 (10 K potentiometers)
-  * Datasheet: http://www.bourns.com/docs/Product-Datasheets/ptv09.pdf
+   * Datasheet: http://www.bourns.com/docs/Product-Datasheets/ptv09.pdf
 
 13 - 60 * white LEDS
-  * Note 1: The max number of simulateously lit white LED is 32. 
+   * Note 1: The max number of simulateously lit white LED is 32. 
 
 14 - 1 red LED (power status)
 
 15 - EastRising ERM802FS-3 8x2 Black-on-White LCD display (HD44780-compatible)
-  * Datasheet (controler): http://www.buydisplay.com/download/ic/SPLC780.pdf
-  * Datasheet (display): http://www.buydisplay.com/download/manual/ERM802-3_Series_Datasheet.pdf
-  * Source: BuyDisplay.com, Price=$ 2.15
+   * Datasheet (controler): http://www.buydisplay.com/download/ic/SPLC780.pdf
+   * Datasheet (display): http://www.buydisplay.com/download/manual/ERM802-3_Series_Datasheet.pdf
+   * Source: BuyDisplay.com, Price=$ 2.15
 
 16 - 35 * tactile switches, replacing the original sliding selectors
 
@@ -79,4 +79,15 @@ ATMega pins used:
    * Rocker Switch SPST 16A (AC) 125V Panel Mount, Snap-In
    * Datasheet: http://switches-connectors-custom.cwind.com/Asset/GRS-4011-XXXX.pdf
    * Source: Digikey P/N=SW323-ND , Price=1.45 CAD
+   
+18 - 11 * Potentiometer knobs
+   * Roland/Boss original knob available here: https://syntaur.com/Items.asp?Item=1496
+   * Copies available here: http://smallbear-electronics.mybigcommerce.com/knurled-colored-cap/
+
+19 - 29 * Slider caps
+   * Roland/Boss original knob available here: https://syntaur.com/Items.asp?Item=1496
+   * Copies available here: http://smallbear-electronics.mybigcommerce.com/slider-cap/
+   
+20 - 1 * 6 Pin cable
+   * Available here: https://syntaur.com/Items.asp?Item=PGCBL
    
