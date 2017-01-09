@@ -63,10 +63,10 @@ ATMega pins used:
 12 - 11 * Bourns PTV09A-4015U103 (10 K potentiometers)
    * Datasheet: http://www.bourns.com/docs/Product-Datasheets/ptv09.pdf
 
-13 - 60 * white LEDS
+13 - 60 * white LEDS (3 mm, flat top)
    * Note 1: The max number of simulateously lit white LED is 32. 
 
-14 - 1 red LED (power status)
+14 - 1 red LED (3 mm, power status)
 
 15 - EastRising ERM802FS-3 8x2 Black-on-White LCD display (HD44780-compatible)
    * Datasheet (controler): http://www.buydisplay.com/download/ic/SPLC780.pdf
