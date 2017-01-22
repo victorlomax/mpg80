@@ -91,3 +91,20 @@ ATMega pins used:
 20 - 1 * 6 Pin cable
    * Available here: https://syntaur.com/Items.asp?Item=PGCBL
    
+21 - 4 * Goldsun GDJ05-R 5 Pin DIN female socket (chassis mount)
+   * Datasheet: http://www.jameco.com/Jameco/Products/ProdDS/15844.pdf
+   * Source: Jameco.com, Price=$ 0.99
+   
+22 - 1 * 6 Pin DIN female socket (chassis mount)
+
+23 - 1 * 1/4" TRS female (chassis mount)
+
+24 - 1 * Qualtek 710W-00/03 Power Connector Receptacle, Female Sockets IEC 320-2-2/F (C14 Variant, Panel Mount)
+   * Datasheet: http://www.qualtekusa.com/Catalog/AC_Receptacles/pdfs/710w0003.pdf
+   * Source: Digikey P/N=SW323-ND , Price=$ 0.74
+
+25 - 1 * Qualtek 703W-00/04 Power Connector Receptacle, Male Sockets IEC 320-C14 (Panel Mount)
+   * Datasheet: http://www.qualtekusa.com/Catalog/AC_Receptacles/pdfs/703w0004.pdf
+   * Source: Digikey P/N=Q212-ND , Price=$ 0.79
+   
+   
