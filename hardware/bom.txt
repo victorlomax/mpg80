@@ -97,7 +97,8 @@ ATMega pins used:
    
 22 - 1 * 6 Pin DIN female socket (chassis mount)
 
-23 - 1 * 1/4" TRS female (chassis mount)
+23 - 1 * 1/4" TRS female Neutrik REAN NYS229
+   * Datasheet: http://www.rean-connectors.com/zoolu-website/media/download/5990/Drawing+NYS229
 
 24 - 1 * Qualtek 710W-00/03 Power Connector Receptacle, Female Sockets IEC 320-2-2/F (C14 Variant, Panel Mount)
    * Datasheet: http://www.qualtekusa.com/Catalog/AC_Receptacles/pdfs/710w0003.pdf
