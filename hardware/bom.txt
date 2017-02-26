@@ -108,4 +108,8 @@ ATMega pins used:
    * Datasheet: http://www.qualtekusa.com/Catalog/AC_Receptacles/pdfs/703w0004.pdf
    * Source: Digikey P/N=Q212-ND , Price=$ 0.79
    
+(optional USB interface)
+26 - 1 * FTDI Vinculum-II (VNC2-32L1B-REEL) USB Controller USB 2.0 SPI, UART Interface 32-LQFP (7x7)
+   * Datasheet: http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_Vinculum-II.pdf
+   * Source: Digikey P/N=768-1051-1-ND, Price=$ 4.84
    
