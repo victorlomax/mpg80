@@ -24,7 +24,7 @@ char beatCounter = 0; // internal beat, which is 1/16th of the actual beat (bpm)
 unsigned int bpm = 120;
 unsigned int newCCR = 0;
 
-void main(void) {
+void main(void) { 
 
 	WDTCTL = WDTPW + WDTHOLD; // disable WDT
 	BCSCTL1 = CALBC1_16MHZ; // 16MHz clock
