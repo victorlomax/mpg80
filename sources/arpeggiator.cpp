@@ -18,7 +18,7 @@ void arpeggiator::del()
 }
 
 // Play the arpeggio
-void arpeggiator::play()
+void arpeggiator::play(word mode, word octaves, word)
 {
     _status |= 0x01;
 }
