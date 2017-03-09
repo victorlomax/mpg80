@@ -7,18 +7,28 @@
 // In mHz: 666.67 - 4000
 // In µS : 62500 - 10417 @ 24 ppqn
 
+// Hold the arpeggio
+void arpeggiator::hold(byte channel, byte mode)
+{
+}
+
 // Add a note to the arpeggio
-void arpeggiator::add()
+void arpeggiator::add(byte channel, byte note)
 {
 }
 
 // Remove a note from the arpeggio
-void arpeggiator::del()
+void arpeggiator::del(byte channel, byte note)
+{
+}
+
+// Remove ALL notes from the arpeggio
+void arpeggiator::del(byte channel)
 {
 }
 
 // Play the arpeggio
-void arpeggiator::play(word mode, word octaves, word)
+void arpeggiator::play(byte channel, word mode, word octaves, word)
 {
     _status |= 0x01;
 }
