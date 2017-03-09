@@ -9,7 +9,7 @@
 #define UP&DOWN 2
 #define RND     3
 
-struct arpeggio
+struct arpeggiator
 {
 private:
   unsigned char _notes[16], // note pool
