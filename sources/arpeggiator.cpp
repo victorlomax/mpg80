@@ -2,12 +2,19 @@
 #include "arpeggiator.h"
 #endif
 
-arpeggiator arp;
-
 // Arpeggiator range:
 // In bpm: 40 - 240 bpm
 // In mHz: 666.67 - 4000
 // In µS : 62500 - 10417 @ 24 ppqn
+
+// Constructor
+void arpeggiator::arpeggiator(bool midi_channel)
+{
+    if (channel[midi_channel]._status & HOLDON)
+        channel[midi_channel]._status &= !HOLDON;
+    else
+        channel[midi_channel]._status |= HOLDON;
+}
 
 // Hold the arpeggio
 void arpeggiator::hold(bool midi_channel, byte mode)
@@ -80,3 +87,5 @@ void arpeggiator::stop(byte midi_channel)
     _status &= 0xfe;
     _pos = 0;
 }
+
+arpeggiator arp;
