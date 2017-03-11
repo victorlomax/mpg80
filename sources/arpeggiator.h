@@ -24,7 +24,7 @@ typedef struct {
                     // h = hold
   } CHANNEL;
 
-class arpeggiator
+class ARPEGGIATOR
 {
   CHANNEL channel[2];
 public:                
@@ -36,4 +36,4 @@ public:
        stop();
   byte play();      // Play the next note
   bool status();
-} arp;
+};
