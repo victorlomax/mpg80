@@ -2,6 +2,8 @@
 #include "arpeggiator.h"
 #endif
 
+arpeggiator arp;
+
 // Arpeggiator range:
 // In bpm: 40 - 240 bpm
 // In mHz: 666.67 - 4000
