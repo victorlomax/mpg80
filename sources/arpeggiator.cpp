@@ -11,73 +11,74 @@
 void arpeggiator::arpeggiator()
 {
     for (int i=0; i < ARP_MAX; i++)
-        channel[0]._status & ARP_HOLD)
-        channel[midi_channel]._status &= !ARP_HOLD;
-    else
-        channel[midi_channel]._status |= ARP_HOLD;
+        _notes[i]=0xff;
+    _pos=0;
+    _status=0;
 }
 
 // Hold the arpeggio
-void arpeggiator::hold(bool midi_channel, byte mode)
+void arpeggiator::hold(byte mode)
 {
-    if (channel[midi_channel]._status & ARP_HOLD)
-        channel[midi_channel]._status &= !ARP_HOLD;
+    if (mode==0)
+        _status &= !ARP_HOLD;
     else
-        channel[midi_channel]._status |= ARP_HOLD;
+        _status |= ARP_HOLD;
 }
 
 // Add a note to the arpeggio
-void arpeggiator::add(byte midi_channel, byte note)
+void arpeggiator::add(byte note)
 {
     // If it's in hold mode and you are not holding any notes down,
     // it continues to play the previous arpeggio. Once you press
     // a new note, it resets the arpeggio and starts a new one.
-    if (notesHeld==0 && channel[midi_channel]._status & ARP_HOLD) 
+    if (notesHeld==0 && _status & ARP_HOLD) 
       resetNotes();
 
     notesHeld++;
 
 
   // find the right place to insert the note in the notes array
-  for (int i=0; i < channel[midi_channel]._last; i++)
+  for (int i=0; i < ARP_MAX && notes[i]!=0xff; i++)
   {
-        if (channel[midi_channel]._notes[i] == note) return;   // already in arpeggio
-        if (channel[midi_channel]._notes[i] < note) continue;  // ignore the notes below it
+        if (_notes[i] == note) return;   // already in arpeggio
+        if (_notes[i] < note) continue;  // ignore the notes below it
         // once we reach the first note in the arpeggio that's higher
         // than the new one, scoot the rest of the arpeggio array over 
         // to the right
-        for (int j = channel[midi_channel]._last; j > i; j--)
-            channel[midi_channel]._notes[j] = channel[midi_channel]._notes[j-1];
+        for (int j = ARP_MAX; j > i; j--)
+            _notes[j] = _notes[j-1];
 
         // and insert the note
-        channel[midi_channel]._notes[i] = note;
+        _notes[i] = note;
         return;        
     }
 }
 
 // Remove a note from the arpeggio
-void arpeggiator::del(byte midi_channel, byte note)
+void arpeggiator::del(byte note)
 {
-        if (velocity == 0) { // note released
-      if (!hold && notes[i] >= pitch) { 
-
-        // shift all notes in the array beyond or equal to the
-        // note in question, thereby removing it and keeping
-        // the array compact.
-        if (i < sizeof(notes))
-          notes[i] = notes[i+1];
-      }
-
+    byte found=FALSE;
+    // Seek for the note
+    for (int i=0; i < ARP_MAX && notes[i]!=0xff; i++)
+    {
+        if (_notes[i] == note) 
+            { found=TRUE; continue; }
+        if (found == TRUE)
+            _notes[i-1] = _notes[i];
+    }
+    _notes[15]=0xff;
 }
 
 // Remove ALL notes from the arpeggio
-void arpeggiator::del(byte midi_channel)
-{
-    channel[midi_channel]._last=0;
+void arpeggiator::del()
+{    
+    for (int i=0; i < ARP_MAX; i++)
+        _notes[i]=0xff;
+    _pos=0;
 }
 
 // Play the arpeggio
-void arpeggiator::play(byte midi_channel, word mode, word octaves, word)
+void arpeggiator::play(byte mode, byte octaves)
 {
     _status |= 0x01;
 }
@@ -89,4 +90,4 @@ void arpeggiator::stop(byte midi_channel)
     _pos = 0;
 }
 
-arpeggiator lower_arp, upper_arp;
+arpeggiator arp_lower, arp_upper;
