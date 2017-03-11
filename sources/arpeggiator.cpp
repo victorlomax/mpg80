@@ -8,21 +8,22 @@
 // In µS : 62500 - 10417 @ 24 ppqn
 
 // Constructor
-void arpeggiator::arpeggiator(bool midi_channel)
+void arpeggiator::arpeggiator()
 {
-    if (channel[midi_channel]._status & HOLDON)
-        channel[midi_channel]._status &= !HOLDON;
+    for (int i=0; i < ARP_MAX; i++)
+        channel[0]._status & ARP_HOLD)
+        channel[midi_channel]._status &= !ARP_HOLD;
     else
-        channel[midi_channel]._status |= HOLDON;
+        channel[midi_channel]._status |= ARP_HOLD;
 }
 
 // Hold the arpeggio
 void arpeggiator::hold(bool midi_channel, byte mode)
 {
-    if (channel[midi_channel]._status & HOLDON)
-        channel[midi_channel]._status &= !HOLDON;
+    if (channel[midi_channel]._status & ARP_HOLD)
+        channel[midi_channel]._status &= !ARP_HOLD;
     else
-        channel[midi_channel]._status |= HOLDON;
+        channel[midi_channel]._status |= ARP_HOLD;
 }
 
 // Add a note to the arpeggio
@@ -31,7 +32,7 @@ void arpeggiator::add(byte midi_channel, byte note)
     // If it's in hold mode and you are not holding any notes down,
     // it continues to play the previous arpeggio. Once you press
     // a new note, it resets the arpeggio and starts a new one.
-    if (notesHeld==0 && channel[midi_channel]._status & HOLDON) 
+    if (notesHeld==0 && channel[midi_channel]._status & ARP_HOLD) 
       resetNotes();
 
     notesHeld++;
@@ -88,4 +89,4 @@ void arpeggiator::stop(byte midi_channel)
     _pos = 0;
 }
 
-arpeggiator arp;
+arpeggiator lower_arp, upper_arp;
