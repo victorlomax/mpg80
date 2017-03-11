@@ -17,7 +17,6 @@ typedef struct {
        _octaves,   // Octaves
        _tempo,     // Tempo
        _pos,       // current position
-       _last,      // last note of the pool
        _status;    // current status: [0hmm msoo]
                     // oo = octaves (0-3 = 1 to 4 octaves)
                     // s = stopped (bit=0) or started (bit=1)
