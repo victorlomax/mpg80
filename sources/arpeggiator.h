@@ -1,19 +1,21 @@
 #define _H_ARPEGGIATOR
 
 // Arpeggiator statuses
-#define STOPPED 0
-#define STARTED 4
+#define ARP_STOPPED 0
+#define ARP_STARTED 4
 
 // Arpeggiator modes
-#define UP      16
-#define UPDOWN  20
-#define DOWN    8
-#define RND     32
+#define ARP_UP      16
+#define ARP_UPDOWN  20
+#define ARP_DOWN    8
+#define ARP_RND     32
 
-#define HOLDON  64
+#define ARP_HOLD  64
+
+#define ARP_MAX 16
 
 typedef struct {
-  byte _notes[16], // note pool: 16 notes max
+  byte _notes[ARP_MAX], // note pool
        _octaves,   // Octaves
        _tempo,     // Tempo
        _pos,       // current position
