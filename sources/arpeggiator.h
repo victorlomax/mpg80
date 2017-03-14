@@ -20,7 +20,7 @@ class arpeggiator
   byte _notes[ARP_MAX], // note pool
        _octaves,   // Octaves
        _tempo,     // Tempo
-       _pos,       // current position
+       _pos,       // current position (0 to 15)
        _status;    // current status: [0hmm msoo]
                     // oo = octaves (0-3 = 1 to 4 octaves)
                     // s = stopped (bit=0) or started (bit=1)
