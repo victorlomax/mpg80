@@ -2,10 +2,19 @@
 #include "arpeggiator.h"
 #endif
 
+#ifndef _H_TIMERONE
+#include "TimerOne.h"
+#endif
+
 // Arpeggiator range:
 // In bpm: 40 - 240 bpm
 // In mHz: 666.67 - 4000
 // In µS : 62500 - 10417 @ 24 ppqn
+
+void callback()
+{
+      digitalWrite(10, digitalRead(10) ^ 1);
+}
 
 // Constructor
 void arpeggiator::arpeggiator()
@@ -81,6 +90,9 @@ void arpeggiator::del()
 void arpeggiator::play(byte mode, byte octaves)
 {
     _status |= 0x01;
+    Timer1.initialize(500000);
+    Timer1.pwm(9, 512);
+    Timer1.attachInterrupt(callback);
     switch(mode)
     {
         case ARP_UP: break;
@@ -89,6 +101,20 @@ void arpeggiator::play(byte mode, byte octaves)
         case ARP_DOWNUP: break;
         case ARP_RND: break;
     }
+}
+
+// Play the next note in the arpeggio
+byte arpeggiator::play()
+{
+    if(_status && 0x01)
+        switch(mode)
+        {
+            case ARP_UP: break;
+            case ARP_UPDOWN: break;
+            case ARP_DOWN: break;
+            case ARP_DOWNUP: break;
+            case ARP_RND: break;
+        }
 }
 
 // Stop the arpeggiator
