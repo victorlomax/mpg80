@@ -81,6 +81,14 @@ void arpeggiator::del()
 void arpeggiator::play(byte mode, byte octaves)
 {
     _status |= 0x01;
+    switch(mode)
+    {
+        case ARP_UP: break;
+        case ARP_UPDOWN: break;
+        case ARP_DOWN: break;
+        case ARP_DOWNUP: break;
+        case ARP_RND: break;
+    }
 }
 
 // Stop the arpeggiator
