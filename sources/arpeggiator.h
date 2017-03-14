@@ -8,6 +8,7 @@
 #define ARP_UP      16
 #define ARP_UPDOWN  20
 #define ARP_DOWN    8
+#define ARP_DOWNUP  52
 #define ARP_RND     32
 
 #define ARP_HOLD  64
