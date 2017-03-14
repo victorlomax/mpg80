@@ -109,7 +109,7 @@ byte arpeggiator::play()
     if(_status && 0x01)
         switch(mode)
         {
-            case ARP_UP: break;
+            case ARP_UP: if(_notes[_pos]==0xff) {_pos=0; if((_status & 0x03)==_octaves) _status &= 0xfc; break;
             case ARP_UPDOWN: break;
             case ARP_DOWN: break;
             case ARP_DOWNUP: break;
