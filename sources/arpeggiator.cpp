@@ -89,7 +89,7 @@ void arpeggiator::del()
 // Play the arpeggio
 void arpeggiator::play(byte mode, byte octaves)
 {
-    _status |= 0x01;
+    _status |= ARP_STARTED;
     Timer1.initialize(500000);
     Timer1.pwm(9, 512);
     Timer1.attachInterrupt(callback);
@@ -99,6 +99,7 @@ void arpeggiator::play(byte mode, byte octaves)
         case ARP_UPDOWN: break;
         case ARP_DOWN: break;
         case ARP_DOWNUP: break;
+        case ARP_BOUNCE: break;
         case ARP_RND: break;
     }
 }
