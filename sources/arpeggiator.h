@@ -1,4 +1,9 @@
 #define _H_ARPEGGIATOR
+// Masks
+#define ARP_STATUS_MASK 0x80
+#define ARP_MODE_MASK   0x70
+#define ARP_OCTAVE_MASK 0x03
+#define ARP_POPSITION_MASK  0xf0
 
 // Arpeggiator statuses
 #define ARP_STOPPED 0
