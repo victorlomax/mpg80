@@ -1,23 +1,23 @@
 #define _H_ARPEGGIATOR
 // Masks
-#define ARP_STATUS_MASK 0x80
-#define ARP_MODE_MASK   0x70
-#define ARP_OCTAVE_MASK 0x03
-#define ARP_POPSITION_MASK  0xf0
+const byte ARP_STATUS_MASK=0x80;
+const byte ARP_MODE_MASK=0x70;
+const byte ARP_OCTAVE_MASK=0x03;
+const byte ARP_POPSITION_MASK=0xf0;
 
 // Arpeggiator statuses
 #define ARP_STOPPED 0
 #define ARP_STARTED 0x80
 
 // Arpeggiator modes
-#define ARP_UP      0x20
-#define ARP_UPDOWN  0x30
-#define ARP_DOWN    0x10
-#define ARP_DOWNUP  0x50
-#define ARP_RND     0x40
-#define ARP_BOUNCE  0x60
-#define ARP_PLAYED  0x70
-#define ARP_HOLD    0x08
+const byte ARP_UP=0x20;
+const byte ARP_UPDOWN=0x30;
+const byte ARP_DOWN=0x10;
+const byte ARP_DOWNUP=0x50;
+const byte ARP_RND=0x40;
+const byte ARP_BOUNCE=0x60;
+const byte ARP_PLAYED=0x70;
+const byte ARP_HOLD=0x08;
 
 #define ARP_MAX 16
 
