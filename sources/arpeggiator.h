@@ -23,7 +23,7 @@ const byte ARP_HOLD=0x08;
 
 class arpeggiator
 {
-  byte _notes[ARP_MAX], // note pool
+  byte _notes[ARP_MAX][2], // note pool
        _octaves,   // Octaves
        _tempo,     // Tempo
        _step,      // Sub step (0->255)
