@@ -44,7 +44,8 @@ void arpeggiator::add(byte note)
       resetNotes();
 
     notesHeld++;
-
+      
+    if (_notes[ARP_MAX][1]!=0xff) return; // Full!
 
   // find the right place to insert the note in the notes array
   for (int i=0; i < ARP_MAX && notes[i]!=0xff; i++)
