@@ -9,6 +9,9 @@ const byte ARP_POPSITION_MASK=0xf0;
 #define ARP_STOPPED 0
 #define ARP_STARTED 0x80
 
+#define ARP_INDEX 1
+#define ARP_NOTES 0
+
 // Arpeggiator modes
 const byte ARP_UP=0x20;
 const byte ARP_UPDOWN=0x30;
