@@ -25,6 +25,7 @@ void arpeggiator::arpeggiator()
         _notes[i]=0xff;
     }
     _pos=0;
+    _last=0;
     _status=0;
 }
 
@@ -48,12 +49,18 @@ void arpeggiator::add(byte note)
 
     notesHeld++;
       
-    if (_notes[_index[ARP_MAX]]!=0xff) return; // Full!
+    if (_last==ARP_MAX) return; // Full!
 
   // find the right place to insert the note in the notes array
-  for (int i=0; i < ARP_MAX && notes[i][ARP_NOTES]!=0xff; i++)
+  for (int i=0; i < ARP_MAX ; i++)
   {
-        if (_notes[i][_notes[i][ARP_INDEX]] == note) return;   // already in arpeggio
+        if (i == _last)
+        {
+              _notes[++_last] = note;
+              return;
+        }
+        if (_notes[i] == note) return;   // already in arpeggio
+  }
         if (_notes[i][0] < note) continue;  // ignore the notes below it
         // once we reach the first note in the arpeggio that's higher
         // than the new one, scoot the rest of the arpeggio array over 
