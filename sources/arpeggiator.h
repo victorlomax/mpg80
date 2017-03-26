@@ -9,9 +9,6 @@ const byte ARP_POPSITION_MASK=0xf0;
 #define ARP_STOPPED 0
 #define ARP_STARTED 0x80
 
-#define ARP_INDEX 1
-#define ARP_NOTES 0
-
 // Arpeggiator modes
 const byte ARP_UP=0x20;
 const byte ARP_UPDOWN=0x30;
@@ -26,7 +23,9 @@ const byte ARP_HOLD=0x08;
 
 class arpeggiator
 {
-  byte _notes[ARP_MAX][2], // note pool
+  byte _notes[ARP_MAX], // note pool
+       _index[ARP_MAX], // index
+       _last,      // Last note in index table
        _octaves,   // Octaves
        _tempo,     // Tempo
        _step,      // Sub step (0->255)
