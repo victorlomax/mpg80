@@ -22,10 +22,11 @@ void arpeggiator::arpeggiator()
     for (int i=0; i < ARP_MAX; i++)
     {
         _index[i]=0x00;
-        _notes[i]=0xff;
+        _notes[i]=0x7f;
     }
     _pos=0;
     _last=0;
+    _free=ARP_MAX;
     _status=0;
 }
 
@@ -44,12 +45,14 @@ void arpeggiator::add(byte note)
     // If it's in hold mode and you are not holding any notes down,
     // it continues to play the previous arpeggio. Once you press
     // a new note, it resets the arpeggio and starts a new one.
-    if (notesHeld==0 && _status & ARP_HOLD) 
+    if (_free<ARP_MAX && _status & ARP_HOLD) 
       resetNotes();
 
     notesHeld++;
       
-    if (_last==ARP_MAX) return; // Full!
+    if (_free==0) return; // Full!
+      
+    _notes[++_last] = note;   // Added to the table
 
   // find the right place to insert the note in the notes array
   for (int i=0; i < ARP_MAX ; i++)
@@ -57,7 +60,7 @@ void arpeggiator::add(byte note)
         if (i == _last)
         {
               _notes[++_last] = note;
-              return;
+              break;
         }
         if (_notes[i] == note) return;   // already in arpeggio
   }
