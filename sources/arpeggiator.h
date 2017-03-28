@@ -25,6 +25,7 @@ class arpeggiator
 {
   byte _notes[ARP_MAX], // note pool
        _index[ARP_MAX], // index
+       _free,      // Nb of free notes
        _last,      // Last note in index table
        _octaves,   // Octaves
        _tempo,     // Tempo
