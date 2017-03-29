@@ -20,10 +20,7 @@ void callback()
 void arpeggiator::arpeggiator()
 {
     for (int i=0; i < ARP_MAX; i++)
-    {
-        _index[i]=0x00;
         _notes[i]=0x7f;
-    }
     _pos=0;
     _last=0;
     _free=ARP_MAX;
@@ -42,6 +39,7 @@ void arpeggiator::hold(byte mode)
 // Add a note to the arpeggio
 void arpeggiator::add(byte note)
 {
+    byte _note=note, b;
     // If it's in hold mode and you are not holding any notes down,
     // it continues to play the previous arpeggio. Once you press
     // a new note, it resets the arpeggio and starts a new one.
@@ -49,32 +47,12 @@ void arpeggiator::add(byte note)
       resetNotes();
 
     notesHeld++;
-      
-    if (_free==0) return; // Full!
-      
-    _notes[++_last] = note;   // Added to the table
-
-  // find the right place to insert the note in the notes array
-  for (int i=0; i < ARP_MAX ; i++)
-  {
-        if (i == _last)
-        {
-              _notes[++_last] = note;
-              break;
-        }
-        if (_notes[i] == note) return;   // already in arpeggio
-  }
-        if (_notes[i][0] < note) continue;  // ignore the notes below it
-        // once we reach the first note in the arpeggio that's higher
-        // than the new one, scoot the rest of the arpeggio array over 
-        // to the right
-        for (int j = ARP_MAX; j > i; j--)
-            _notes[j] = _notes[j-1];
-
-        // and insert the note
-        _notes[i] = note;
-        return;        
-    }
+     if (_notes[ARP_MAX] & 0x7f != 0x7f) return; // Table full            
+     for (i=0; i<ARP_MAX; i++)
+     {
+           if (_notes[i] & 0x7f == note) return; // Note already in table
+           if (_notes[i] & 0x7f > _note) {b=_notes[i]; _notes[i]=_note; _note=b; }
+     }
 }
 
 // Remove a note from the arpeggio
