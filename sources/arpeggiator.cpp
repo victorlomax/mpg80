@@ -58,23 +58,21 @@ void arpeggiator::add(byte note)
 // Remove a note from the arpeggio
 void arpeggiator::del(byte note)
 {
-    byte found=FALSE;
+    byte found=0;
     // Seek for the note
-    for (int i=0; i < ARP_MAX && notes[i]!=0xff; i++)
+    for (int i=0; i < ARP_MAX; i++)
     {
-        if (_notes[i] == note) 
-            { found=TRUE; continue; }
-        if (found == TRUE)
-            _notes[i-1] = _notes[i];
+        if (_notes[i] & 0x7f == note) { found=0x7f; continue; }
+        if (_notes[i] & 0x7f < found) _notes[i-1] = _notes[i];
     }
-    _notes[15]=0xff;
+    _notes[ARP_MAX]=0x7f;
 }
 
 // Remove ALL notes from the arpeggio
 void arpeggiator::del()
 {    
     for (int i=0; i < ARP_MAX; i++)
-        _notes[i]=0xff;
+        _notes[i]=0x7f;
     _pos=0;
 }
 
