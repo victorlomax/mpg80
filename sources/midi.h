@@ -246,4 +246,11 @@ typedef struct {
 char	midi_channel[2];
 uchar	voice[48];
 PATCH	program[2];
-
+class midi
+{
+	char _events[MIDI_MAX];
+	unsigned char number;
+public:
+	byte event_push(),
+	     event_pop();
+}
