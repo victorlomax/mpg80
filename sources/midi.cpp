@@ -6,3 +6,8 @@
 char	midi_channel[2];
 uchar	voice[48];
 PATCH	program[2];
+
+byte decode()
+{
+}
+
