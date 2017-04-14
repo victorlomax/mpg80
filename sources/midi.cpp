@@ -43,16 +43,16 @@ byte decode(byte b, byte status)
     switch(b & 0xf0)
     {
       case 0xa0:  // Polyphonic Aftertouch
-      case oxd0:  // Monophonic aftertouch   
+      case 0xd0:  // Monophonic aftertouch   
       case 0xe0: return status; // pitch bend
     }
     // Thse messages are recognized; we return the new status
     switch(b)
     {
-      case 0xf0: return 0xf0; // sysex
-      case 0xf1: return 0x30; // MTC Quarter Frame
-      case 0xf2: return 0x40; // Song pointer position
-      case 0xf7:  // EOX
+      case 0xf0: return SOX; // sysex
+      case 0xf1: return MTC; // MTC Quarter Frame
+      case 0xf2: return SPP; // Song pointer position
+      case 0xf7: return SMM; // EOX
       case 0xf8:  // (system real time) Timing clock (24 ppqn)
       case 0xfa:  // (system real time) Start
       case 0xfb:  // (system real time) Continue
