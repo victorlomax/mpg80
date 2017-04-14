@@ -15,18 +15,16 @@ PATCH	program[2];
 //      these messages can appear inside the MIDI flow; 
 // STATUS
 //  0x00: start
-//  0x01: MTC quarter frame message, 1 data byte expected
-//  0x02: SONG pointer position message, 2 data bytes expected
-//  0x03: Start OF Exclusive, several data bytes expected
-//  0x04: Timing Clock message, 
-//  0x05: Start message (no more data byte expected)
-//  0x06: Continue message (no more data byte expected)
-//  0x07: Stop message (no more data byte expected)
-//  0x08: NOTE OFF message begining, 2 data bytes expected
-//  0x09: NOTE ON message begining, 2 data bytes expected
-//  0x0b: CONTROL CHANGE message begining, 2 data bytes expected
-//  0x0c: PROGRAM CHANGE message begining, 2 data bytes expected
-//  0xDx: discard the next D bytes
+//  0xx1: discard next byte
+//  0xx2: discard next 2 bytes
+//  0x3x: MTC quarter frame message, 1 data byte expected
+//  0x4x: SONG pointer position message, 2 data bytes expected
+//  0xfx: Start OF Exclusive, several data bytes expected
+//  0x5x: Timing Clock message, 
+//  0x8x: NOTE OFF message begining, 2 data bytes expected
+//  0x9x: NOTE ON message begining, 2 data bytes expected
+//  0xBx: CONTROL CHANGE message begining, 2 data bytes expected
+//  0xCx: PROGRAM CHANGE message begining, 2 data bytes expected
 //  
 byte decode(byte b, byte status)
 {
@@ -51,9 +49,9 @@ byte decode(byte b, byte status)
     // Thse messages are recognized; we return the new status
     switch(b)
     {
-      case 0xf0:  // sysex
-      case 0xf1:  // MTC Quarter Frame
-      case 0xf2:  // Song pointer position
+      case 0xf0: return 0xf0; // sysex
+      case 0xf1: return 0x30; // MTC Quarter Frame
+      case 0xf2: return 0x40; // Song pointer position
       case 0xf7:  // EOX
       case 0xf8:  // (system real time) Timing clock (24 ppqn)
       case 0xfa:  // (system real time) Start
