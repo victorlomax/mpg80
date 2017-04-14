@@ -1,0 +1,25 @@
+How MIDI messages are decoded?
+
+The MIDI messages are decoded with a finite-state machine.
+Incoming bytes are stored in a circular buffer, and retrieved by the decoder.
+The circular buffer contains 2 pointers: bufrptr and bufwptr. Both pointers are equals when the buffer is empty. When bufwptr=bufrptr-1, the buffer is full.
+
+The status is based on two half-byte (upper and lower): 
++----+----+
+| UP | LO |
++----+----+
+- the upper half-byte is the status
+- the lower half-byte is the number of expected data bytes (1 ou 2)
+
+The upper half-byte can have one of the following:
+SMM	Start of a new midi message
+MTC	MTC quarter frame message, 1 data byte expected
+SPP	SONG pointer position message, 2 data bytes expected
+SOX	Start OF Exclusive, several data bytes expected
+CLK	Timing Clock message, 
+NOF	NOTE OFF message begining, 2 data bytes expected
+NON	NOTE ON message begining, 2 data bytes expected
+CCH	CONTROL CHANGE message begining, 2 data bytes expected
+PCH	PROGRAM CHANGE message begining, 2 data bytes expected
+
+Once a byte is read from the circular buffer, the decoder set the status accordingly. If data bytes are expected, the number of data expected bytes is added to the status. Hence, every time a data byte is read and decoded, the lower-half of statuts byte is decremented. The message is fully decoded when the lower-half of the status byte is null.
