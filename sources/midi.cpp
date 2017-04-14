@@ -30,15 +30,21 @@ PATCH	program[2];
 //  
 byte decode(byte b, byte status)
 {
-    byte s;
-    
-// Ignored messages
     switch(b)
     {
-      case 0xf3: return SMM+2; // Song Select, 2 DATA bytes following
-      case 0xf4:  // not defined
-      case 0xf5:  // not defined
-      case 0xf6:  // Tune request
+        case 0xf0: return SOX;   // sysex
+        case 0xf1: return MTC;   // MTC Quarter Frame
+        case 0xf2: return SPP;   // Song pointer position
+        case 0xf3: return SMM+2; // Song Select, 2 DATA bytes following
+        case 0xf4: return SMM;   // not defined
+        case 0xf5: return SMM;   // not defined
+        case 0xf6: return SMM;   // Tune request (ignored)
+        case 0xf7: return SMM;   // EOX
+        case 0xf8: return CLK;   // (system real time) Timing clock (24 ppqn)
+      case 0xfa: (do somth); return SMM; // (system real time) Start
+      case 0xfb: (do somth); return SMM; // (system real time) Continue
+      case 0xfc: (do somth); return SMM; // (system real time) Stop
+      case 0xff: (do somth); return SMM; // (system real time) Reset
       case 0xf9:  // not defined
       case 0xfd:  // not defined
       case 0xfe:  // Active sensing 
