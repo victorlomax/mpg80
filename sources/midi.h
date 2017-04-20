@@ -244,14 +244,17 @@ typedef struct {
 #define LOWER	1
 
 const byte SMM=0x00; // Start of a new midi message
-const byte MTC=0x30; // MTC quarter frame message, 1 data byte expected
-const byte SPP=0x40; // SONG pointer position message, 2 data bytes expected
-const byte SOX=0xf0; // Start OF Exclusive, several data bytes expected
+const byte MTC=0x30; // MTC quarter frame  (1 data byte)
+const byte SPP=0x40; // SONG pointer position  (2 data bytes)
+const byte SOX=0xF0; // Start OF Exclusive, several data bytes expected
 const byte CLK=0x50; // Timing Clock message, 
-const byte NOF=0x80; // NOTE OFF message begining, 2 data bytes expected
-const byte NON=0x90; // NOTE ON message begining, 2 data bytes expected
-const byte CCH=0xB0; // CONTROL CHANGE message begining, 2 data bytes expected
-const byte PCH=0xC0; // PROGRAM CHANGE message begining, 2 data bytes expected
+const byte NOF=0x80; // NOTE OFF (2 data bytes)
+const byte NON=0x90; // NOTE ON (2 data bytes)
+const byte PAT=0xA0; // Polyphonic After Touch (2 data bytes)
+const byte CCH=0xB0; // CONTROL CHANGE (2 data bytes)
+const byte PCH=0xC0; // PROGRAM CHANGE  (2 data bytes)
+const byte CHP=0xD0; // CHANNEL PRESSURE  (1 data byte)
+const byte PBD=0xE0; // Pitch Bender  (2 data bytes)
 
 char	midi_channel[2];
 uchar	voice[48];
