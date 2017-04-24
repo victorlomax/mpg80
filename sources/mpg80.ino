@@ -1,6 +1,7 @@
 // ATMega328
 
 #include <SPI.h>
+#include <MCP3008.h>
 
 MCP button_pannel(1);
 
@@ -14,6 +15,8 @@ MCP button_pannel(1);
 // Highest channel number on the highest board
 #define MAX_POT_CHANNEL	0x07
 
+
+
 // ***** SPI control *****
 // Port B (Pin 14-16) is used to select the channel (ie SPI device) on 74LS138
 #define SPI_DEVICE	PORTB
@@ -24,6 +27,10 @@ MCP button_pannel(1);
 #define SPI_LED		3
 #define SPI_MIDI	4
 #define SPI_RAM		5
+#define	SPI_CS_PIN	12
+#define SPI_CLOCK_PIN   9
+#define SPI_MOSI_PIN    11
+#define SPI_MISO_PIN    10
 
 char values[28];
 
@@ -39,7 +46,7 @@ void setup()
 
 	pinMode(14, OUTPUT);	// Port B.0
 	pinMode(15, OUTPUT);	// Port B.1
-
+						
 	...
 }
 void loop()
