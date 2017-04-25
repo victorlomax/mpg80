@@ -3,6 +3,31 @@
 #include <SPI.h>
 #include <MCP3008.h>
 
+// SC16IS750_SPI for a converter between SPI and a Serial port
+#include "mbed.h"
+#include "SC16IS750.h"
+ 
+SPI spi(PTD2, PTD3, PTD1); //MOSI, MISO, SCK
+SC16IS750_SPI serial_bridge(&spi, PTD0);  // SPI port and CS pin
+ 
+Serial pc(USBTX,USBRX);
+ 
+int main() {
+  pc.printf("\nHello World!\n");
+ 
+  serial_bridge.baud(9600);
+  //serial_bridge.printf("\nHello World!\n"); // supported through Stream
+  
+  while(1) { 
+    serial_bridge.ioSetState(0x00);
+    wait(0.5);
+    serial_bridge.ioSetState(0xFF); 
+    wait(0.5); 
+    serial_bridge.putc('*');  
+    pc.putc('*');                
+  }
+}
+
 MCP button_pannel(1);
 
 #define	MODIFIED	0x80
@@ -56,7 +81,9 @@ void loop()
 void pot_scan(char *values)
 {
 	int board, channel, value;
-
+	
+	
+    serial_bridge.ioSetState(0x00);    wait(0.5);    serial_bridge.ioSetState(0xFF);     wait(0.5);     serial_bridge.putc('*');      pc.putc('*');                
 	digitalwrite(SPI_DEVICE, SPI_ADC);
 	digitalwrite(SPI_SELECT, LOW);
 	SPI.beginTransaction(SPISettings(3600000, MSBFIRST, SPI_MODE0))
