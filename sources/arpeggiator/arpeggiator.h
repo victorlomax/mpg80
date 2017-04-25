@@ -1,4 +1,5 @@
-#define _H_ARPEGGIATOR
+#ifndef ARPEGGIATOR_h
+#define ARPEGGIATOR_h
 // Masks
 const byte ARP_STATUS_MASK=0x80;
 const byte ARP_MODE_MASK=0x70;
@@ -46,3 +47,4 @@ public:
   byte play();      // Play the next note
   bool status();
 };
+#endif
