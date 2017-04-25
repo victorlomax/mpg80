@@ -1,4 +1,4 @@
-#ifndef _H_MIDI
+#ifndef MIDI_h
 #include <midi.h>
 #endif
 
