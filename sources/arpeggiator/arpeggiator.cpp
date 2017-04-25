@@ -1,4 +1,4 @@
-#ifndef _H_ARPEGGIATOR
+#ifndef ARPEGGIATOR_h
 #include "arpeggiator.h"
 #endif
 
