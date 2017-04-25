@@ -1,4 +1,5 @@
-#define _H_MIDI
+#ifndef MIDI_h
+#define MIDI_h
 typedef unsigned char uchar;
 
 /* ******************************
@@ -267,3 +268,4 @@ public:
 	byte event_push(),
 	     event_pop();
 }
+#endif
