@@ -145,7 +145,7 @@ void SC16IS752::WriteRegister(byte channel, byte reg_addr, byte val)
 	}
 }
 
-int16_t SC16IS752::SetBaudrate(uint32_t baudrate) //return error of baudrate parts per thousand
+int16_t SC16IS752::SetBaudrate(byte channel, uint32_t baudrate) //return error of baudrate parts per thousand
 {
     uint16_t divisor;
     byte prescaler;
@@ -188,7 +188,7 @@ int16_t SC16IS752::SetBaudrate(uint32_t baudrate) //return error of baudrate par
 
 }
 
-void SC16IS752::SetLine(byte data_length, byte parity_select, byte stop_length )
+void SC16IS752::SetLine(byte channel, byte data_length, byte parity_select, byte stop_length )
 {
     byte temp_lcr;
     temp_lcr = ReadRegister(channel,SC16IS752_REG_LCR);
@@ -239,7 +239,7 @@ void SC16IS752::SetLine(byte data_length, byte parity_select, byte stop_length )
     WriteRegister(channel,SC16IS752_REG_LCR,temp_lcr);
 }
 
-void SC16IS752::GPIOSetPinMode(byte pin_number, byte i_o)
+void SC16IS752::GPIOSetPinMode(byte channel, byte pin_number, byte i_o)
 {
     byte temp_iodir;
 
@@ -254,7 +254,7 @@ void SC16IS752::GPIOSetPinMode(byte pin_number, byte i_o)
     return;
 }
 
-void SC16IS752::GPIOSetPinState(byte pin_number, byte pin_state)
+void SC16IS752::GPIOSetPinState(byte channel, byte pin_number, byte pin_state)
 {
     byte temp_iostate;
 
@@ -270,7 +270,7 @@ void SC16IS752::GPIOSetPinState(byte pin_number, byte pin_state)
 }
 
 
-byte SC16IS752::GPIOGetPinState(byte pin_number)
+byte SC16IS752::GPIOGetPinState(byte channel, byte pin_number)
 {
     byte temp_iostate;
 
@@ -281,26 +281,26 @@ byte SC16IS752::GPIOGetPinState(byte pin_number)
     return 1;
 }
 
-byte SC16IS752::GPIOGetPortState(void)
+byte SC16IS752::GPIOGetPortState(byte channel)
 {
 
     return ReadRegister(channel,SC16IS752_REG_IOSTATE);
 
 }
 
-void SC16IS752::GPIOSetPortMode(byte port_io)
+void SC16IS752::GPIOSetPortMode(byte channel, byte port_io)
 {
     WriteRegister(channel,SC16IS752_REG_IODIR, port_io);
     return;
 }
 
-void SC16IS752::GPIOSetPortState(byte port_state)
+void SC16IS752::GPIOSetPortState(byte channel, byte port_state)
 {
     WriteRegister(channel,SC16IS752_REG_IOSTATE, port_state);
     return;
 }
 
-void SC16IS752::SetPinInterrupt(byte io_int_ena)
+void SC16IS752::SetPinInterrupt(byte channel, byte io_int_ena)
 {
     WriteRegister(channel,SC16IS752_REG_IOINTENA, io_int_ena);
     return;
@@ -308,87 +308,88 @@ void SC16IS752::SetPinInterrupt(byte io_int_ena)
 
 void SC16IS752::ResetDevice(void)
 {
-    byte reg;
+	byte reg;
 
-    reg = ReadRegister(channel,SC16IS752_REG_IOCONTROL);
-    reg |= 0x08;
-    WriteRegister(channel,SC16IS752_REG_IOCONTROL, reg);
+	reg = ReadRegister(0,SC16IS752_REG_IOCONTROL);
+	WriteRegister(0,SC16IS752_REG_IOCONTROL, reg|0x08);
 
-    return;
+	reg = ReadRegister(1,SC16IS752_REG_IOCONTROL);
+	WriteRegister(1,SC16IS752_REG_IOCONTROL, reg|0x08);
+	return;
 }
 
-void SC16IS752::ModemPin(byte gpio) //gpio == 0, gpio[7:4] are modem pins, gpio == 1 gpio[7:4] are gpios
+void SC16IS752::ModemPin(byte channel, byte gpio) //gpio == 0, gpio[7:4] are modem pins, gpio == 1 gpio[7:4] are gpios
 {
-    byte temp_iocontrol;
+	byte temp_iocontrol;
 
-    temp_iocontrol = ReadRegister(channel,SC16IS752_REG_IOCONTROL);
-    if ( gpio == 0 ) {
-        temp_iocontrol |= 0x02;
-    } else {
-        temp_iocontrol &= 0xFD;
-    }
-    WriteRegister(channel,SC16IS752_REG_IOCONTROL, temp_iocontrol);
+	temp_iocontrol = ReadRegister(channel,SC16IS752_REG_IOCONTROL);
+	if ( gpio == 0 ) {
+        	temp_iocontrol |= 0x02;
+	} else {
+        	temp_iocontrol &= 0xFD;
+	}
+	WriteRegister(channel,SC16IS752_REG_IOCONTROL, temp_iocontrol);
 
-    return;
+	return;
 }
 
-void SC16IS752::GPIOLatch(byte latch)
+void SC16IS752::GPIOLatch(byte channel, byte latch)
 {
-    byte temp_iocontrol;
+	byte temp_iocontrol;
 
-    temp_iocontrol = ReadRegister(channel,SC16IS752_REG_IOCONTROL);
-    if ( latch == 0 ) {
-        temp_iocontrol &= 0xFE;
-    } else {
-        temp_iocontrol |= 0x01;
-    }
-    WriteRegister(channel,SC16IS752_REG_IOCONTROL, temp_iocontrol);
+	temp_iocontrol = ReadRegister(channel,SC16IS752_REG_IOCONTROL);
+	if ( latch == 0 ) {
+		temp_iocontrol &= 0xFE;
+	} else {
+		temp_iocontrol |= 0x01;
+	}
+	WriteRegister(channel,SC16IS752_REG_IOCONTROL, temp_iocontrol);
 
-    return;
+	return;
 }
 
-void SC16IS752::InterruptControl(byte int_ena)
+void SC16IS752::InterruptControl(byte channel, byte int_ena)
 {
-    WriteRegister(channel,SC16IS752_REG_IER, int_ena);
+	WriteRegister(channel,SC16IS752_REG_IER, int_ena);
 }
 
-byte SC16IS752::InterruptPendingTest(void)
+byte SC16IS752::InterruptPendingTest(byte channel)
 {
-    return (ReadRegister(channel,SC16IS752_REG_IIR) & 0x01);
+	return (ReadRegister(channel,SC16IS752_REG_IIR) & 0x01);
 }
 
-void SC16IS752::__isr(void)
+void SC16IS752::__isr(byte channel)
 {
-    byte irq_src;
+	byte irq_src;
 
-    irq_src = ReadRegister(channel,SC16IS752_REG_IIR);
-    irq_src = (irq_src >> 1);
-    irq_src &= 0x3F;
+	irq_src = ReadRegister(channel,SC16IS752_REG_IIR);
+	irq_src = (irq_src >> 1);
+	irq_src &= 0x3F;
 
-    switch (irq_src) {
-        case 0x06:                  //Receiver Line Status Error
-            break;
-        case 0x0c:               //Receiver time-out interrupt
-            break;
-        case 0x04:               //RHR interrupt
-            break;
-        case 0x02:               //THR interrupt
-            break;
-        case 0x00:                  //modem interrupt;
-            break;
-        case 0x30:                  //input pin change of state
-            break;
-        case 0x10:                  //XOFF
-            break;
-        case 0x20:                  //CTS,RTS
-            break;
-        default:
-            break;
-    }
-    return;
+	switch (irq_src) {
+		case 0x06:		//Receiver Line Status Error
+			break;
+		case 0x0c:		//Receiver time-out interrupt
+			break;
+		case 0x04:		//RHR interrupt		
+			break;
+		case 0x02:		//THR interrupt
+			break;
+		case 0x00:		//modem interrupt;
+			break;
+		case 0x30:		//input pin change of state
+			break;
+		case 0x10:		//XOFF
+			break;
+		case 0x20:		//CTS,RTS
+			break;
+		default:
+			break;
+	}
+	return;
 }
 
-void SC16IS752::FIFOEnable(byte fifo_enable)
+void SC16IS752::FIFOEnable(byte channel, byte fifo_enable)
 {
     byte temp_fcr;
 
@@ -404,7 +405,7 @@ void SC16IS752::FIFOEnable(byte fifo_enable)
     return;
 }
 
-void SC16IS752::FIFOReset(byte rx_fifo)
+void SC16IS752::FIFOReset(byte channel, byte rx_fifo)
 {
      byte temp_fcr;
 
@@ -421,7 +422,7 @@ void SC16IS752::FIFOReset(byte rx_fifo)
 
 }
 
-void SC16IS752::FIFOSetTriggerLevel(byte rx_fifo, byte length)
+void SC16IS752::FIFOSetTriggerLevel(byte channel, byte rx_fifo, byte length)
 {
     byte temp_reg;
 
@@ -441,23 +442,22 @@ void SC16IS752::FIFOSetTriggerLevel(byte rx_fifo, byte length)
     return;
 }
 
-byte SC16IS752::FIFOAvailableData(void)
+byte SC16IS752::FIFOAvailableData(byte channel)
 {
 #ifdef  SC16IS752_DEBUG_PRINT
-    Serial.print("=====Available data:");
-    Serial.println(ReadRegister(channel,SC16IS752_REG_RXLVL), DEC);
+	Serial.print("=====Available data:");
+	Serial.println(ReadRegister(channel,SC16IS752_REG_RXLVL), DEC);
 #endif
-   return ReadRegister(channel,SC16IS752_REG_RXLVL);
+	return ReadRegister(channel,SC16IS752_REG_RXLVL);
 //    return ReadRegister(channel,SC16IS752_REG_LSR) & 0x01;
 }
 
 byte SC16IS752::FIFOAvailableSpace(void)
 {
-   return ReadRegister(channel,SC16IS752_REG_TXLVL);
-
+	return ReadRegister(channel,SC16IS752_REG_TXLVL);
 }
 
-void SC16IS752::WriteByte(byte val)
+void SC16IS752::WriteByte(byte channel, byte val)
 {
 	byte tmp_lsr;
  /*   while ( FIFOAvailableSpace() == 0 ){
@@ -482,7 +482,7 @@ void SC16IS752::WriteByte(byte val)
 
 }
 
-int SC16IS752::ReadByte(void)
+int SC16IS752::ReadByte(byte channel)
 {
 	volatile byte val;
 	if (FIFOAvailableData() == 0) {
@@ -503,7 +503,7 @@ int SC16IS752::ReadByte(void)
 
 }
 
-void SC16IS752::EnableTransmit(byte tx_enable)
+void SC16IS752::EnableTransmit(byte channel, byte tx_enable)
 {
     byte temp_efcr;
     temp_efcr = ReadRegister(channel,SC16IS752_REG_EFCR);
@@ -517,7 +517,7 @@ void SC16IS752::EnableTransmit(byte tx_enable)
     return;
 }
 
-byte SC16IS752::ping()
+byte SC16IS752::ping(byte channel)
 {
 	WriteRegister(channel,SC16IS752_REG_SPR,0x55);
 	if (ReadRegister(channel,SC16IS752_REG_SPR) !=0x55) {
@@ -568,7 +568,7 @@ int16_t SC16IS752::readwithtimeout()
 }
 */
 
-void SC16IS752::flush()
+void SC16IS752::flush(byte channel)
 {
 	byte tmp_lsr;
 
@@ -591,4 +591,5 @@ int SC16IS752::peek()
 	return peek_buf;
 
 }
+
 
