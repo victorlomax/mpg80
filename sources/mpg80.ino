@@ -5,10 +5,10 @@
 
 // SC16IS750_SPI for a converter between SPI and a Serial port
 #include "mbed.h"
-#include "SC16IS750.h"
+#include "SC16IS752.h"
  
 SPI spi(PTD2, PTD3, PTD1); //MOSI, MISO, SCK
-SC16IS750_SPI serial_bridge(&spi, PTD0);  // SPI port and CS pin
+SC16IS752_SPI serial_bridge(&spi, PTD0);  // SPI port and CS pin
  
 Serial pc(USBTX,USBRX);
  
@@ -44,18 +44,18 @@ MCP button_pannel(1);
 
 // ***** SPI control *****
 // Port B (Pin 14-16) is used to select the channel (ie SPI device) on 74LS138
-#define SPI_DEVICE	PORTB
+#define SPICTL_DEVICE	PORTB
 
-#define SPI_IDLE	0
-#define SPI_ADC		1
-#define SPI_BUTTON	2
-#define SPI_LED		3
-#define SPI_MIDI	4
-#define SPI_RAM		5
-#define	SPI_CS_PIN	12
-#define SPI_CLOCK_PIN   9
-#define SPI_MOSI_PIN    11
-#define SPI_MISO_PIN    10
+#define SPICTL_IDLE	0
+#define SPICTL_ADC		1
+#define SPICTL_BUTTON	2
+#define SPICTL_LED		3
+#define SPICTL_MIDI	4
+#define SPICTL_RAM		5
+#define	SPICTL_CS_PIN	12
+#define SPICTL_CLOCK_PIN   9
+#define SPICTL_MOSI_PIN    11
+#define SPICTL_MISO_PIN    10
 
 char values[28];
 
