@@ -206,10 +206,8 @@ void SC16IS752::SetLine(byte channel, byte data_length, byte parity_select, byte
         case 7:
             temp_lcr |= 0x02;
             break;
-        case 8:
-            temp_lcr |= 0x03;
-            break;
-        default:
+        case 8:	
+	default:	
             temp_lcr |= 0x03;
             break;
     }
